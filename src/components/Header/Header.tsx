@@ -1,8 +1,7 @@
 function Header() {
   return (
     <header>
-      <link href='/dist/output.css' rel='stylesheet'></link>
-      <h1 className='text-3xl font-bold'>Crypto Dashboard</h1>
+      <h1 className='text-3xl text-center'>Crypto Dashboard</h1>
     </header>
   );
 }
