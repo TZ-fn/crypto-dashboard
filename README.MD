@@ -17,3 +17,11 @@ Run `npm install` then `npm run dev` in the main directory.
 Open `http://localhost:3000` to view the app in your browser.
 
 ## Technologies I used
+
+TypeScript
+
+React.js
+
+Tailwind CSS
+
+Vite
