@@ -1,12 +1,14 @@
-import { Outlet } from 'react-router-dom';
-import Header from './components/Header/Header';
+import { Route, Routes } from 'react-router-dom';
+import MainLogo from './components/Header/MainLogo/MainLogo';
+import Layout from './components/Layout/Layout';
 import './index.css';
 
 function App() {
   return (
     <div>
-      <Header />
-      <Outlet />
+      <Routes>
+        <Route path='/' element={<Layout />}></Route>
+      </Routes>
     </div>
   );
 }
