@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import CryptoList from './components/CryptoList/CryptoList';
 import Layout from './components/Layout/Layout';
 import './index.css';
 
@@ -7,7 +8,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route element={<p>asdasd</p>}></Route>
+          <Route index element={<CryptoList />} />
         </Route>
       </Routes>
     </div>
