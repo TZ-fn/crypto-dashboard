@@ -14,7 +14,8 @@ html,
 body {
   height: 100%;
   text-rendering: optimizeSpeed;
-  background-color: #0f172a;
+  background-color: hsl(222, 47%, 11%);
+  color: hsl(0, 0%, 95%);
 }
 
 body {
