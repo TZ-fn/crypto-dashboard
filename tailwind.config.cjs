@@ -6,6 +6,7 @@ module.exports = {
       'text-primary': 'hsl(0, 0%, 95%)',
       bg: 'hsl(222, 47%, 11%)',
       'bg-lighter': 'hsl(222, 30%, 20%)',
+      'bg-lighter-2': 'hsl(222, 47%, 30%)',
       border: 'hsla(0, 0%, 100%, 0.1)',
     },
     extend: {},

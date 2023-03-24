@@ -2,7 +2,7 @@ import CryptoItem from './CryptoItem/CryptoItem';
 
 function CryptoList() {
   return (
-    <ul className='px-2 border border-border rounded-sm'>
+    <ul className='px-2 border border-border rounded'>
       <CryptoItem />
       <CryptoItem />
       <CryptoItem />
