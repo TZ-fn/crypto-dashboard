@@ -4,6 +4,8 @@ import Layout from './components/Layout/Layout';
 import './index.css';
 
 function App() {
+  const COINMARKETCAP_API_KEY = import.meta.env.VITE_COINMARKETCAP_API_KEY;
+
   return (
     <div>
       <Routes>
