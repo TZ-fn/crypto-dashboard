@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { useQuery, useQueryClient, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import CryptoList from './components/CryptoList/CryptoList';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import CoinList from './components/CoinList/CoinList';
 import Layout from './components/Layout/Layout';
 import './index.css';
 
@@ -12,7 +12,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<CryptoList />} />
+            <Route index element={<CoinList />} />
           </Route>
         </Routes>
       </QueryClientProvider>
