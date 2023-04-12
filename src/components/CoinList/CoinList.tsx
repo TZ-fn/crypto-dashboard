@@ -1,4 +1,5 @@
 import CoinListItem from './CoinListItem/CoinListItem';
+import Coin from 'types/Coint';
 import { useQuery } from '@tanstack/react-query';
 
 function CryptoList() {
@@ -17,7 +18,7 @@ function CryptoList() {
 
   return (
     <ul className='px-2 border border-border rounded'>
-      {data.data.map(({ name, id }) => (
+      {data.data.map(({ name, id }: Coin) => (
         <CoinListItem key={id} name={name} />
       ))}
     </ul>
