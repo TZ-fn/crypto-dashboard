@@ -18,8 +18,8 @@ function CryptoList() {
 
   return (
     <ul className='px-2 border border-border rounded'>
-      {data.data.map(({ name, id }: Coin) => (
-        <CoinListItem key={id} name={name} />
+      {data.data.map(({ id, name, quote }: Coin) => (
+        <CoinListItem key={id} name={name} price={quote.USD.price} />
       ))}
     </ul>
   );
