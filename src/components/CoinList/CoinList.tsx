@@ -1,6 +1,7 @@
 import CoinListItem from './CoinListItem/CoinListItem';
 import Coin from 'types/Coint';
 import { useQuery } from '@tanstack/react-query';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 function CryptoList() {
   const { isLoading, error, data, isFetching } = useQuery({
@@ -12,7 +13,7 @@ function CryptoList() {
     },
   });
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) return 'An error has occurred: ' + error.message;
 
