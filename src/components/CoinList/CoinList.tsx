@@ -18,7 +18,7 @@ function CryptoList() {
   if (error) return 'An error has occurred: ' + error.message;
 
   return (
-    <ul className='px-2 border border-border rounded'>
+    <ul className='px-2 min-w-full border border-border rounded'>
       {data.data.map(
         ({
           id,
