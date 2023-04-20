@@ -14,6 +14,8 @@ function CryptoList() {
     },
   });
 
+  const coinIDs = data?.data.map((coin: Coin) => coin.id).join(',');
+
   if (isLoading) return <LoadingSpinner />;
 
   if (error) return <p>{`An error has occurred: ${error.message}`}</p>;
@@ -22,34 +24,38 @@ function CryptoList() {
     <>
       {isFetching && <p>Updating ...</p>}
 
-      <ul className='px-2 min-w-full border border-border rounded'>
-        <li className='flex flex-row my-4 px-6 py-8 pl-16 bg-bg-lighter rounded hover:bg-bg-lighter-2 cursor-pointer text-lg'>
-          <p className='mr-auto'>#</p>
-          <p className='mr-auto'>Name</p>
-          <p className='mr-auto'>Price</p>
-          <p className='mr-auto'>Volume (24h)</p>
-        </li>
-        {data.data.map(
-          (
-            {
-              id,
-              name,
-              quote: {
-                USD: { price, volume_24h },
-              },
-            }: Coin,
-            index: number,
-          ) => (
-            <CoinListItem
-              key={id}
-              index={index + 1}
-              name={name}
-              price={formatCurrency(price)}
-              volume24h={formatCurrency(volume_24h)}
-            />
-          ),
-        )}
-      </ul>
+      <table className='px-2 min-w-full border border-border rounded'>
+        <thead>
+          <tr className='flex flex-row my-4 px-6 py-8 pl-16 bg-bg-lighter rounded hover:bg-bg-lighter-2 cursor-pointer text-lg'>
+            <th className='mr-auto'>#</th>
+            <th className='mr-auto'>Name</th>
+            <th className='mr-auto'>Price</th>
+            <th className='mr-auto'>Volume (24h)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.data.map(
+            (
+              {
+                id,
+                name,
+                quote: {
+                  USD: { price, volume_24h },
+                },
+              }: Coin,
+              index: number,
+            ) => (
+              <CoinListItem
+                key={id}
+                index={index + 1}
+                name={name}
+                price={formatCurrency(price)}
+                volume24h={formatCurrency(volume_24h)}
+              />
+            ),
+          )}
+        </tbody>
+      </table>
     </>
   );
 }
