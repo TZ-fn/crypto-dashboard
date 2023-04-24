@@ -24,7 +24,7 @@ function CryptoList() {
     <>
       {isFetching && <p>Updating ...</p>}
 
-      <table className='px-2 w-full max-w-6xl'>
+      <table className='px-2 w-full max-w-6xl border-collapse'>
         <thead>
           <tr className='flex flex-row px-6 py-8 pl-16 bg-bg-lighter-2 rounded hover:bg-bg-lighter cursor-pointer text-lg'>
             <th className='mr-auto'>#</th>
