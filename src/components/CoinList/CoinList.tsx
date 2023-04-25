@@ -1,5 +1,5 @@
 import CoinListItem from './CoinListItem/CoinListItem';
-import Coin from 'types/Coint';
+import Coin from '~/types/Coin';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
@@ -24,13 +24,13 @@ function CryptoList() {
     <>
       {isFetching && <p>Updating ...</p>}
 
-      <table className='px-2 w-full max-w-6xl border-collapse'>
+      <table className='px-2 w-full max-w-6xl border-separate border-spacing-y-3'>
         <thead>
-          <tr className='flex flex-row px-6 py-8 pl-16 bg-bg-lighter-2 rounded hover:bg-bg-lighter cursor-pointer text-lg'>
-            <th className='mr-auto'>#</th>
-            <th className='mr-auto'>Name</th>
-            <th className='mr-auto'>Price</th>
-            <th className='mr-auto'>Volume (24h)</th>
+          <tr className='bg-bg-lighter-2 rounded hover:bg-bg-lighter cursor-pointer text-lg'>
+            <th className='px-12 py-6 text-left'>#</th>
+            <th className='px-12 py-6 text-left'>Name</th>
+            <th className='px-12 py-6 text-left'>Price</th>
+            <th className='px-12 py-6 text-left'>Volume (24h)</th>
           </tr>
         </thead>
         <tbody>
