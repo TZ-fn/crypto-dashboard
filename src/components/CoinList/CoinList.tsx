@@ -28,7 +28,7 @@ function CryptoList() {
         <thead>
           <tr className='bg-bg-lighter-2 rounded hover:bg-bg-lighter cursor-pointer text-lg'>
             <th className='px-12 py-6 text-left'>#</th>
-            <th className='px-12 py-6 text-left'>Name</th>
+            <th className='px-12 py-6 text-left'>Name and Symbol</th>
             <th className='px-12 py-6 text-left'>Price</th>
             <th className='px-12 py-6 text-left'>Volume (24h)</th>
           </tr>
@@ -39,6 +39,7 @@ function CryptoList() {
               {
                 id,
                 name,
+                symbol,
                 quote: {
                   USD: { price, volume_24h },
                 },
@@ -49,6 +50,7 @@ function CryptoList() {
                 key={id}
                 index={index + 1}
                 name={name}
+                symbol={symbol}
                 price={formatCurrency(price)}
                 volume24h={formatCurrency(volume_24h)}
               />
