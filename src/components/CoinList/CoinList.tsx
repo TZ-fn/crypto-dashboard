@@ -18,11 +18,19 @@ function CryptoList() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (error) return <p>{`An error has occurred: ${error.message}`}</p>;
+  if (error)
+    return (
+      <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error has occurred: ${error.message}`}</p>
+    );
 
   return (
     <>
-      {isFetching && <p>Updating ...</p>}
+      {isFetching && (
+        <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>
+          Updating ...
+          <LoadingSpinner />
+        </p>
+      )}
 
       <table className='px-2 w-full max-w-6xl border-separate border-spacing-y-3'>
         <thead>
