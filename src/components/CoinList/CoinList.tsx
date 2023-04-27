@@ -34,11 +34,11 @@ function CryptoList() {
 
       <table className='px-2 w-full max-w-6xl border-separate border-spacing-y-3'>
         <thead>
-          <tr className='bg-bg-lighter-2 rounded hover:bg-bg-lighter cursor-pointer text-lg'>
-            <th className='px-12 py-6 text-left'>#</th>
+          <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
+            <th className='px-12 py-6 text-left rounded-l'>#</th>
             <th className='px-12 py-6 text-left'>Name and Symbol</th>
             <th className='px-12 py-6 text-left'>Price</th>
-            <th className='px-12 py-6 text-left'>Volume (24h)</th>
+            <th className='px-12 py-6 text-left rounded-r'>Volume (24h)</th>
           </tr>
         </thead>
         <tbody>
