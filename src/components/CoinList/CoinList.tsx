@@ -16,6 +16,25 @@ function CryptoList() {
 
   const coinIDs = data?.data.map((coin: Coin) => coin.id).join(',');
 
+  const {
+    status: metaStatus,
+    fetchStatus: metaFetchStatus,
+    data: meta,
+  } = useQuery({
+    queryKey: ['meta', coinIDs],
+    queryFn: async () => {
+      const response = await fetch(
+        `https://crypto-dashboard-backend-5tas.onrender.com/info?id=${coinIDs}`,
+      );
+      const data = await response.json();
+      return data;
+    },
+    // The query will not execute until the userId exists
+    enabled: !!coinIDs,
+  });
+
+  console.log(meta);
+
   if (isLoading) return <LoadingSpinner />;
 
   if (error)
@@ -35,10 +54,10 @@ function CryptoList() {
       <table className='px-2 w-full max-w-6xl border-separate border-spacing-y-3'>
         <thead>
           <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
-            <th className='px-12 py-6 text-left rounded-l'>#</th>
-            <th className='px-12 py-6 text-left'>Name and Symbol</th>
-            <th className='px-12 py-6 text-left'>Price</th>
-            <th className='px-12 py-6 text-left rounded-r'>Volume (24h)</th>
+            <th className='px-12 py-7 text-left rounded-l'>#</th>
+            <th className='px-12 py-7 text-left'>Name and Symbol</th>
+            <th className='px-12 py-7 text-left'>Price</th>
+            <th className='px-12 py-7 text-left rounded-r'>Volume (24h)</th>
           </tr>
         </thead>
         <tbody>
