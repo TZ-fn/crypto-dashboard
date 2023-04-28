@@ -17,8 +17,8 @@ function CryptoList() {
   const coinIDs = data?.data.map((coin: Coin) => coin.id).join(',');
 
   const {
-    status: metaStatus,
-    fetchStatus: metaFetchStatus,
+    isFetching: metaIsFetching,
+    error: metaError,
     data: meta,
   } = useQuery({
     queryKey: ['meta', coinIDs],
@@ -29,17 +29,20 @@ function CryptoList() {
       const data = await response.json();
       return data;
     },
-    // The query will not execute until the userId exists
     enabled: !!coinIDs,
   });
 
-  console.log(meta);
+  function getCoinLogo(coinID: number): string {
+    return meta.data[coinID].logo;
+  }
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading || metaIsFetching) return <LoadingSpinner />;
 
-  if (error)
+  if (error || metaError)
     return (
-      <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error has occurred: ${error.message}`}</p>
+      <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error has occurred: ${
+        error.message || metaError.message
+      }`}</p>
     );
 
   return (
@@ -55,6 +58,7 @@ function CryptoList() {
         <thead>
           <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
             <th className='px-12 py-7 text-left rounded-l'>#</th>
+            <th className='px-12 py-7 text-left'>Logo</th>
             <th className='px-12 py-7 text-left'>Name and Symbol</th>
             <th className='px-12 py-7 text-left'>Price</th>
             <th className='px-12 py-7 text-left rounded-r'>Volume (24h)</th>
@@ -76,6 +80,7 @@ function CryptoList() {
               <CoinListItem
                 key={id}
                 index={index + 1}
+                logo={getCoinLogo(id)}
                 name={name}
                 symbol={symbol}
                 price={formatCurrency(price)}
