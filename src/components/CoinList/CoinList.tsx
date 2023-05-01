@@ -38,11 +38,14 @@ function CryptoList() {
 
   if (isLoading || metaIsFetching) return <LoadingSpinner />;
 
-  if (error || metaError)
+  if (error && error instanceof Error)
     return (
-      <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error has occurred: ${
-        error.message || metaError.message
-      }`}</p>
+      <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's data has occurred: ${error.message}`}</p>
+    );
+
+  if (metaError && metaError instanceof Error)
+    return (
+      <p className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's logo has occurred: ${metaError.message}`}</p>
     );
 
   return (
