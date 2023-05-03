@@ -1,5 +1,3 @@
-import { Route } from 'react-router-dom';
-
 interface CoinListItemProps {
   index: number;
   logo: string;

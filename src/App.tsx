@@ -11,8 +11,8 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <Routes>
-          <Route path='/*' element={<Layout />}>
-            <Route path='/*' index element={<CoinList />} />
+          <Route path='/' element={<Layout />}>
+            <Route index element={<CoinList />} />
           </Route>
         </Routes>
       </QueryClientProvider>

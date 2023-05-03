@@ -3,7 +3,7 @@ import Coin from '~/types/Coin';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
-import { Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function CryptoList() {
   const { isLoading, error, data, isFetching } = useQuery({
@@ -69,23 +69,31 @@ function CryptoList() {
           </tr>
         </thead>
         <tbody>
-          <Routes>
-            {data.data.map(
-              (
-                {
-                  id,
-                  name,
-                  symbol,
-                  quote: {
-                    USD: { price, volume_24h },
-                  },
-                }: Coin,
-                index: number,
-              ) => (
-                <Route key={id} path={`/${name}`} element={<p>{name}</p>}></Route>
-              ),
-            )}
-          </Routes>
+          {data.data.map(
+            (
+              {
+                id,
+                name,
+                symbol,
+                quote: {
+                  USD: { price, volume_24h },
+                },
+              }: Coin,
+              index: number,
+            ) => (
+              <Link to={'details?' + name.toLocaleLowerCase()}>
+                <CoinListItem
+                  key={id}
+                  index={index}
+                  logo={getCoinLogo(id)}
+                  name={name}
+                  symbol={symbol}
+                  price={formatCurrency(price)}
+                  volume24h={formatCurrency(volume_24h)}
+                />
+              </Link>
+            ),
+          )}
         </tbody>
       </table>
     </>
