@@ -3,7 +3,6 @@ import Coin from '~/types/Coin';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
-import { Link } from 'react-router-dom';
 
 function CryptoList() {
   const { isLoading, error, data, isFetching } = useQuery({
@@ -81,17 +80,15 @@ function CryptoList() {
               }: Coin,
               index: number,
             ) => (
-              <Link to={'details?' + name.toLocaleLowerCase()}>
-                <CoinListItem
-                  key={id}
-                  index={index}
-                  logo={getCoinLogo(id)}
-                  name={name}
-                  symbol={symbol}
-                  price={formatCurrency(price)}
-                  volume24h={formatCurrency(volume_24h)}
-                />
-              </Link>
+              <CoinListItem
+                key={id}
+                index={index}
+                logo={getCoinLogo(id)}
+                name={name}
+                symbol={symbol}
+                price={formatCurrency(price)}
+                volume24h={formatCurrency(volume_24h)}
+              />
             ),
           )}
         </tbody>
