@@ -9,15 +9,7 @@ interface CoinListItemProps {
   volume24h: string;
 }
 
-function CoinListItem({
-  index,
-  logo,
-  name,
-  symbol,
-  price,
-  volume24h,
-  handleClick,
-}: CoinListItemProps) {
+function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListItemProps) {
   const navigate = useNavigate();
 
   return (
