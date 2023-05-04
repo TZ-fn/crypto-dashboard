@@ -14,7 +14,7 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
 
   return (
     <tr
-      onClick={() => navigate(`details?${name.toLocaleLowerCase()}`)}
+      onClick={() => navigate(`details/${name.toLocaleLowerCase()}`)}
       className='border-b-2 bg-bg-lighter hover:bg-bg-lighter-2 cursor-pointer text-lg'
     >
       <td className='px-12 py-6 rounded-l'>{index}</td>
