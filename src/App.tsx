@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<CoinList />} />
-            <Route path='/details/:name' element={<CoinDetails />}></Route>
+            <Route path='/details/:name' element={<CoinDetails />} />
           </Route>
         </Routes>
       </QueryClientProvider>
