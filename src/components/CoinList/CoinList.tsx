@@ -3,15 +3,13 @@ import Coin from '~/types/Coin';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
+import queryLatestData from 'queryFunctions/queryLatestData';
+import queryMetaData from 'queryFunctions/queryMetaData';
 
 function CryptoList() {
   const { isLoading, error, data, isFetching } = useQuery({
     queryKey: ['latest'],
-    queryFn: async () => {
-      const response = await fetch('https://crypto-dashboard-backend-5tas.onrender.com/latest');
-      const data = await response.json();
-      return data;
-    },
+    queryFn: queryLatestData,
   });
 
   const coinIDs = data?.data.map((coin: Coin) => coin.id).join(',');
@@ -22,13 +20,7 @@ function CryptoList() {
     data: meta,
   } = useQuery({
     queryKey: ['meta', coinIDs],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://crypto-dashboard-backend-5tas.onrender.com/info?id=${coinIDs}`,
-      );
-      const data = await response.json();
-      return data;
-    },
+    queryFn: () => queryMetaData(coinIDs),
     enabled: !!coinIDs,
   });
 
