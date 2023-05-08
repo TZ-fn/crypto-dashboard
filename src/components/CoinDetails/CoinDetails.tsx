@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import capitalise from 'utils/capitalise';
 
 function CoinDetails() {
   let params = useParams();
@@ -12,7 +13,7 @@ function CoinDetails() {
     },
   });
 
-  return <div>CoinDetails: {params.name}</div>;
+  return <div>CoinDetails: {params.name && capitalise(params.name)}</div>;
 }
 
 export default CoinDetails;
