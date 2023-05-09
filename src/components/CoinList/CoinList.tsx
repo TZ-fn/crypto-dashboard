@@ -1,29 +1,9 @@
 import CoinListItem from './CoinListItem/CoinListItem';
 import Coin from '~/types/Coin';
-import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
-import queryLatestData from 'queryFunctions/queryLatestData';
-import queryMetaData from 'queryFunctions/queryMetaData';
 
 function CryptoList() {
-  const { isLoading, error, data, isFetching } = useQuery({
-    queryKey: ['latest'],
-    queryFn: queryLatestData,
-  });
-
-  const coinIDs = data?.data.map((coin: Coin) => coin.id).join(',');
-
-  const {
-    isFetching: metaIsFetching,
-    error: metaError,
-    data: meta,
-  } = useQuery({
-    queryKey: ['meta', coinIDs],
-    queryFn: () => queryMetaData(coinIDs),
-    enabled: !!coinIDs,
-  });
-
   function getCoinLogo(coinID: number): string {
     return meta.data[coinID].logo;
   }

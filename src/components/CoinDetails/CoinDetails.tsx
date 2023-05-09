@@ -1,17 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import capitalise from 'utils/capitalise';
+import CoinsContext from '~/context/CoinsContext';
 
 function CoinDetails() {
   let params = useParams();
-  const { isLoading, error, data, isFetching } = useQuery({
-    queryKey: ['latest'],
-    queryFn: async () => {
-      const response = await fetch('https://crypto-dashboard-backend-5tas.onrender.com/latest');
-      const data = await response.json();
-      return data;
-    },
-  });
+  const data = useContext(CoinsContext);
 
   return <div>CoinDetails: {params.name && capitalise(params.name)}</div>;
 }
