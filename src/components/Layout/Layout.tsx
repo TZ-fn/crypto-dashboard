@@ -8,7 +8,7 @@ import queryMetaData from 'queryFunctions/queryMetaData';
 import CoinsContext from 'context/CoinsContext';
 
 export default function Layout() {
-  const { isLoading, error, data, isFetching } = useQuery({
+  const { isLoading, isFetching, error, data } = useQuery({
     queryKey: ['latest'],
     queryFn: queryLatestData,
   });
@@ -16,6 +16,7 @@ export default function Layout() {
   const coinIDs = data?.data.map((coin: Coin) => coin.id).join(',');
 
   const {
+    isLoading: metaIsLoading,
     isFetching: metaIsFetching,
     error: metaError,
     data: meta,
@@ -25,8 +26,23 @@ export default function Layout() {
     enabled: !!coinIDs,
   });
 
+  const contextData = {
+    latestData: {
+      isLoading: isLoading,
+      isFetching: isFetching,
+      data: data,
+      error: error,
+    },
+    metaData: {
+      isLoading: metaIsLoading,
+      isFetching: metaIsFetching,
+      metaData: meta,
+      error: metaError,
+    },
+  };
+
   return (
-    <CoinsContext.Provider value={data}>
+    <CoinsContext.Provider value={contextData}>
       <div>
         <Header />
         <MainView>

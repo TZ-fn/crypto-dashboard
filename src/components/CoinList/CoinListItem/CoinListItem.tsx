@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '~/components/LoadingSpinner/LoadingSpinner';
 
 interface CoinListItemProps {
   index: number;
-  logo: string;
+  logo: string | undefined;
   name: string;
   symbol: string;
   price: string;
@@ -19,7 +20,7 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
     >
       <td className='px-12 py-6 rounded-l'>{index}</td>
       <td className='px-12 py-6'>
-        <img className='max-w-[4rem]' src={logo} alt='' />
+        {logo ? <img className='max-w-[4rem]' src={logo} alt='' /> : <LoadingSpinner />}
       </td>
       <td className='px-12 py-6'>
         {name} - {symbol}

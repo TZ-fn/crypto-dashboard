@@ -5,7 +5,6 @@ import CoinsContext from '~/context/CoinsContext';
 
 function CoinDetails() {
   let params = useParams();
-  const data = useContext(CoinsContext);
 
   return <div>CoinDetails: {params.name && capitalise(params.name)}</div>;
 }
