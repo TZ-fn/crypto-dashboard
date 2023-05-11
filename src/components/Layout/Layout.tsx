@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import queryLatestData from 'queryFunctions/queryLatestData';
 import Coin from '~/types/Coin';
 import queryMetaData from 'queryFunctions/queryMetaData';
-import CoinsContext from 'context/CoinsContext';
+import CoinsContext from '~/context/CoinsContext';
 
 export default function Layout() {
   const { isLoading, isFetching, error, data } = useQuery({

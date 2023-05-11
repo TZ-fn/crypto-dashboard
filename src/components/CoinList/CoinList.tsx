@@ -4,11 +4,17 @@ import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
 import { useContext } from 'react';
 import CoinsContext from '~/context/CoinsContext';
+import ContextType from 'types/ContextType';
 
 function CryptoList() {
-  const contextData = useContext(CoinsContext);
+  const contextData = useContext(CoinsContext) as ContextType;
   const { isFetching, isLoading, data, error } = contextData.latestData;
-  const { metaIsFetching, metaIsLoading, metaData, metaError } = contextData.metaData;
+  const {
+    isFetching: metaIsFetching,
+    isLoading: metaIsLoading,
+    metaData,
+    error: metaError,
+  } = contextData.metaData;
 
   function getCoinLogo(coinID: number): string | undefined {
     if (metaData) {
