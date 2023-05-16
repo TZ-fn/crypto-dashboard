@@ -17,31 +17,38 @@ function CoinDetails() {
     error: metaError,
   } = contextData.metaData;
 
-  function getCoinLogoByName(coinName: string): string | undefined {
-    if (metaData) {
-      return metaData.data.filter((coin: Coin) => coin.name === capitalise(coinName));
-    }
+  function getCoinLogoByID(ID: number): string {
+    return metaData.data[ID].logo;
+  }
+  function getCoinIDByName(coinName: string): number {
+    return data.data.filter((coin: Coin) => coin.name === capitalise(coinName))[0].id;
   }
 
   if (isLoading || metaIsLoading) return <LoadingSpinner />;
 
-  if (error && error instanceof Error)
+  if (error && error instanceof Error) {
     return (
       <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's data has occurred: ${error.message}`}</div>
     );
+  }
 
-  if (metaError && metaError instanceof Error)
+  if (metaError && metaError instanceof Error) {
     return (
       <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's logo has occurred: ${metaError.message}`}</div>
     );
+  }
 
-  console.log(metaData.data[1]);
+  if (!params.name) {
+    return (
+      <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>
+        Please select a coin to get it's details.
+      </div>
+    );
+  }
   return (
     <div className=''>
-      {params.name !== undefined && (
-        <img src={getCoinLogoByName(getCoinLogoByName(capitalise(params.name)))} alt='' />
-      )}
-      <h1>{params.name && capitalise(params.name)}</h1>
+      <h1>{capitalise(params.name)}</h1>
+      <img src={getCoinLogoByID(getCoinIDByName(params.name))} alt='' />
     </div>
   );
 }
