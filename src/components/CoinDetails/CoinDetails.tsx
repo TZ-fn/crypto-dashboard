@@ -18,7 +18,9 @@ function CoinDetails() {
   } = contextData.metaData;
 
   function getCoinIDByName(coinName: string): number {
-    return data.data.filter((coin: Coin) => coin.name === capitalise(coinName))[0].id;
+    return data.data.filter(
+      (coin: Coin) => coin.name.toLocaleLowerCase() === coinName.toLocaleLowerCase(),
+    )[0].id;
   }
 
   function getCoinLogoByID(ID: number): string {
