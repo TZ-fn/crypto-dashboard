@@ -17,11 +17,12 @@ function CoinDetails() {
     error: metaError,
   } = contextData.metaData;
 
-  function getCoinLogoByID(ID: number): string {
-    return metaData.data[ID].logo;
-  }
   function getCoinIDByName(coinName: string): number {
     return data.data.filter((coin: Coin) => coin.name === capitalise(coinName))[0].id;
+  }
+
+  function getCoinLogoByID(ID: number): string {
+    return metaData.data[ID].logo;
   }
 
   if (isLoading || metaIsLoading) return <LoadingSpinner />;
@@ -46,9 +47,9 @@ function CoinDetails() {
     );
   }
   return (
-    <div className=''>
-      <h1>{capitalise(params.name)}</h1>
-      <img src={getCoinLogoByID(getCoinIDByName(params.name))} alt='' />
+    <div className='px-24 py-6 flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
+      <h1 className='text-4xl'>{capitalise(params.name)}</h1>
+      <img className='w-[5rem]' src={getCoinLogoByID(getCoinIDByName(params.name))} alt='' />
     </div>
   );
 }
