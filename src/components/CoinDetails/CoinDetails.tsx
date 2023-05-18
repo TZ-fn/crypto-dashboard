@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import capitalise from 'utils/capitalise';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
@@ -17,15 +17,21 @@ function CoinDetails() {
     error: metaError,
   } = contextData.metaData;
 
-  function getCoinIDByName(coinName: string): number {
-    return data.data.filter(
-      (coin: Coin) => coin.name.toLocaleLowerCase() === coinName.toLocaleLowerCase(),
-    )[0].id;
-  }
+  const currentCoinData = useMemo(() => {
+    if (data) {
+      return data.data.filter((coin: Coin) => {
+        if (params.name) {
+          return coin.name.toLocaleLowerCase() === params.name.toLocaleLowerCase();
+        }
+      })[0];
+    }
+  }, [data]);
 
-  function getCoinLogoByID(ID: number): string {
-    return metaData.data[ID].logo;
-  }
+  const currentCoinMetaData = useMemo(() => {
+    if (data && metaData) {
+      return metaData.data[currentCoinData.id];
+    }
+  }, [metaData]);
 
   if (isLoading || metaIsLoading) return <LoadingSpinner />;
 
@@ -51,7 +57,7 @@ function CoinDetails() {
   return (
     <div className='px-24 py-6 w-full flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
-      <img className='w-[5rem]' src={getCoinLogoByID(getCoinIDByName(params.name))} alt='' />
+      <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
     </div>
   );
 }
