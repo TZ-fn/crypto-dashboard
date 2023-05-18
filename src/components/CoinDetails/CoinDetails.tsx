@@ -49,8 +49,8 @@ function CoinDetails() {
     );
   }
   return (
-    <div className='px-24 py-6 flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
-      <h1 className='text-4xl'>{capitalise(params.name)}</h1>
+    <div className='px-24 py-6 w-full flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
+      <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={getCoinLogoByID(getCoinIDByName(params.name))} alt='' />
     </div>
   );
