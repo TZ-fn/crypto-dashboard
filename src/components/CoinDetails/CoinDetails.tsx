@@ -1,8 +1,9 @@
 import { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import capitalise from 'utils/capitalise';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import CoinsContext from 'context/CoinsContext';
+import capitalise from 'utils/capitalise';
+import formatCurrency from 'utils/formatCurrency';
 import Coin from 'types/Coin';
 import ContextType from 'types/ContextType';
 
@@ -58,6 +59,11 @@ function CoinDetails() {
     <div className='px-24 py-6 w-full flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
+      <p className='max-w-[60rem] text-l'>{currentCoinMetaData.description}</p>
+      <p className='text-2xl'>
+        Current price: {formatCurrency(currentCoinData.quote.USD.price)}
+        {currentCoinData.quote.USD.percent_change_24h > 0 ? ' up' : ' down'}
+      </p>
     </div>
   );
 }
