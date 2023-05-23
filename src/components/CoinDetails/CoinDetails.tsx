@@ -4,10 +4,9 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import CoinsContext from 'context/CoinsContext';
 import capitalise from 'utils/capitalise';
 import formatCurrency from 'utils/formatCurrency';
-import ArrowUp from 'assets/icons/ArrowUp.png';
-import ArrowDown from 'assets/icons/ArrowDown.png';
 import Coin from 'types/Coin';
 import ContextType from 'types/ContextType';
+import PriceTrendIndicator from '../PriceTrendIndicator/PriceTrendIndicator';
 
 function CoinDetails() {
   let params = useParams();
@@ -58,18 +57,16 @@ function CoinDetails() {
     );
   }
 
+  const priceTrend = currentCoinData.quote.USD.percent_change_24h > 0 ? 'up' : 'down';
+
   return (
     <div className='px-24 py-6 w-full flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
       <p className='max-w-[60rem] text-l'>{currentCoinMetaData.description}</p>
-      <p className='text-2xl'>
+      <p className='text-2xl flex items-center justify-center'>
         Current price: {formatCurrency(currentCoinData.quote.USD.price)}
-        {currentCoinData.quote.USD.percent_change_24h > 0 ? (
-          <img src={ArrowUp} />
-        ) : (
-          <img src={ArrowDown} />
-        )}
+        <PriceTrendIndicator trend={priceTrend} />
       </p>
     </div>
   );
