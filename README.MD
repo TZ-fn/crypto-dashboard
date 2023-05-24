@@ -22,6 +22,12 @@ TypeScript
 
 React.js
 
+React Query
+
+React Router
+
+Sass
+
 Tailwind CSS
 
 Vite
