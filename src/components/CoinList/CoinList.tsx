@@ -1,9 +1,9 @@
+import { useContext, useState } from 'react';
 import CoinListItem from './CoinListItem/CoinListItem';
-import Coin from '~/types/Coin';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
-import { useContext } from 'react';
-import CoinsContext from '~/context/CoinsContext';
+import CoinsContext from 'context/CoinsContext';
+import Coin from 'types/Coin';
 import ContextType from 'types/ContextType';
 
 function CryptoList() {
@@ -15,12 +15,15 @@ function CryptoList() {
     metaData,
     error: metaError,
   } = contextData.metaData;
+  const [sortedData, setSortedData] = useState(null);
 
   function getCoinLogo(coinID: number): string | undefined {
     if (metaData) {
       return metaData.data[coinID].logo;
     }
   }
+
+  function sortTable(sortBy: string) {}
 
   if (isLoading || metaIsFetching) return <LoadingSpinner />;
 
