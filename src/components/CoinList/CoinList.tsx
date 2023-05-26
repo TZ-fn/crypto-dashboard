@@ -23,7 +23,25 @@ function CryptoList() {
     }
   }
 
-  function sortTable(sortBy: string) {}
+  type sortingTypes = 'byName' | 'byPrice' | 'byVolume';
+
+  function sortTable(sortBy: sortingTypes) {
+    let sortedData;
+    if (sortBy === 'byName') {
+      sortedData = data.data.sort((coin1: Coin, coin2: Coin) =>
+        coin1.name.localeCompare(coin2.name, 'en'),
+      );
+    }
+    if (sortBy === 'byPrice') {
+    }
+    if (sortBy === 'byVolume') {
+    }
+
+    return sortedData;
+  }
+
+  // sortTable('byName');
+  console.log(sortTable('byName'));
 
   if (isLoading || metaIsFetching) return <LoadingSpinner />;
 
