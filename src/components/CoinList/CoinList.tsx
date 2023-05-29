@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CoinListItem from './CoinListItem/CoinListItem';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
@@ -15,7 +15,14 @@ function CryptoList() {
     metaData,
     error: metaError,
   } = contextData.metaData;
-  const [sortedData, setSortedData] = useState(null);
+
+  const [sortedData, setSortedData] = useState<null | Coin[]>(null);
+
+  useEffect(() => {
+    if (data) {
+      setSortedData(data.data);
+    }
+  }, [data]);
 
   function getCoinLogo(coinID: number): string | undefined {
     if (metaData) {
@@ -25,10 +32,10 @@ function CryptoList() {
 
   type sortingTypes = 'byName' | 'byPrice' | 'byVolume';
 
-  function sortTable(sortBy: sortingTypes) {
+  function sortTable(sortBy: sortingTypes): Coin[] {
     let sortedData;
     if (sortBy === 'byName') {
-      sortedData = data.data.sort((coin1: Coin, coin2: Coin) =>
+      sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) =>
         coin1.name.localeCompare(coin2.name, 'en'),
       );
     }
@@ -36,12 +43,8 @@ function CryptoList() {
     }
     if (sortBy === 'byVolume') {
     }
-
-    return sortedData;
+    return sortedData as Coin[];
   }
-
-  // sortTable('byName');
-  console.log(sortTable('byName'));
 
   if (isLoading || metaIsFetching) return <LoadingSpinner />;
 
@@ -69,35 +72,38 @@ function CryptoList() {
           <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
             <th className='px-12 py-7 text-left rounded-l'>#</th>
             <th className='px-12 py-7 text-left'>Logo</th>
-            <th className='px-12 py-7 text-left'>Name and Symbol</th>
+            <th className='px-12 py-7 text-left' onClick={() => setSortedData(sortTable('byName'))}>
+              Name and Symbol
+            </th>
             <th className='px-12 py-7 text-left'>Price</th>
             <th className='px-12 py-7 text-left rounded-r'>Volume (24h)</th>
           </tr>
         </thead>
         <tbody>
-          {data.data.map(
-            (
-              {
-                id,
-                name,
-                symbol,
-                quote: {
-                  USD: { price, volume_24h },
+          {sortedData &&
+            sortedData.map(
+              (
+                {
+                  id,
+                  name,
+                  symbol,
+                  quote: {
+                    USD: { price, volume_24h },
+                  },
                 },
-              }: Coin,
-              index: number,
-            ) => (
-              <CoinListItem
-                key={id}
-                index={index}
-                logo={getCoinLogo(id)}
-                name={name}
-                symbol={symbol}
-                price={formatCurrency(price)}
-                volume24h={formatCurrency(volume_24h)}
-              />
-            ),
-          )}
+                index: number,
+              ) => (
+                <CoinListItem
+                  key={id}
+                  index={index}
+                  logo={getCoinLogo(id)}
+                  name={name}
+                  symbol={symbol}
+                  price={formatCurrency(price)}
+                  volume24h={formatCurrency(volume_24h)}
+                />
+              ),
+            )}
         </tbody>
       </table>
     </>
