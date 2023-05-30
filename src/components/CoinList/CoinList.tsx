@@ -40,8 +40,14 @@ function CryptoList() {
       );
     }
     if (sortBy === 'byPrice') {
+      sortedData = [...data.data].sort(
+        (coin1: Coin, coin2: Coin) => coin2.quote.USD.price - coin1.quote.USD.price,
+      );
     }
     if (sortBy === 'byVolume') {
+      sortedData = [...data.data].sort(
+        (coin1: Coin, coin2: Coin) => coin2.quote.USD.volume_24h - coin1.quote.USD.volume_24h,
+      );
     }
     return sortedData as Coin[];
   }
@@ -75,8 +81,18 @@ function CryptoList() {
             <th className='px-12 py-7 text-left' onClick={() => setSortedData(sortTable('byName'))}>
               Name and Symbol
             </th>
-            <th className='px-12 py-7 text-left'>Price</th>
-            <th className='px-12 py-7 text-left rounded-r'>Volume (24h)</th>
+            <th
+              className='px-12 py-7 text-left'
+              onClick={() => setSortedData(sortTable('byPrice'))}
+            >
+              Price
+            </th>
+            <th
+              className='px-12 py-7 text-left rounded-r'
+              onClick={() => setSortedData(sortTable('byVolume'))}
+            >
+              Volume (24h)
+            </th>
           </tr>
         </thead>
         <tbody>
