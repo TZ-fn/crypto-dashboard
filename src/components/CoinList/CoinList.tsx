@@ -36,7 +36,7 @@ function CryptoList() {
     let sortedData;
     if (sortBy === 'byName') {
       sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) =>
-        coin1.name.localeCompare(coin2.name, 'en'),
+        new Intl.Collator('en').compare(coin1.name, coin2.name),
       );
     }
     if (sortBy === 'byPrice') {
