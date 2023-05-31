@@ -17,6 +17,13 @@ function CryptoList() {
   } = contextData.metaData;
 
   const [sortedData, setSortedData] = useState<null | Coin[]>(null);
+  const [sortingStatus, setSortingStatus] = useState<{
+    by: null | 'byName' | 'byPrice' | 'byVolume';
+    direction: null | 'ascending' | 'descending';
+  }>({
+    by: null,
+    direction: null,
+  });
 
   useEffect(() => {
     if (data) {
@@ -34,6 +41,15 @@ function CryptoList() {
 
   function sortTable(sortBy: sortingTypes): Coin[] {
     let sortedData;
+
+    sortingStatus.direction === null
+      ? setSortingStatus({ ...sortingStatus, direction: 'descending' })
+      : sortingStatus.direction === 'descending'
+      ? setSortingStatus({ ...sortingStatus, direction: 'ascending' })
+      : setSortingStatus({ ...sortingStatus, direction: null });
+
+    console.log(sortingStatus.direction);
+
     if (sortBy === 'byName') {
       sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) =>
         new Intl.Collator('en').compare(coin1.name, coin2.name),
