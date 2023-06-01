@@ -5,6 +5,7 @@ import formatCurrency from 'utils/formatCurrency';
 import CoinsContext from 'context/CoinsContext';
 import Coin from 'types/Coin';
 import ContextType from 'types/ContextType';
+import SortTypeIndicator from 'components/SortTypeIndicator/SortTypeIndicator';
 
 function CryptoList() {
   const contextData = useContext(CoinsContext) as ContextType;
@@ -43,12 +44,10 @@ function CryptoList() {
     let sortedData;
 
     sortingStatus.direction === null
-      ? setSortingStatus({ ...sortingStatus, direction: 'descending' })
+      ? setSortingStatus({ by: sortBy, direction: 'descending' })
       : sortingStatus.direction === 'descending'
-      ? setSortingStatus({ ...sortingStatus, direction: 'ascending' })
-      : setSortingStatus({ ...sortingStatus, direction: null });
-
-    console.log(sortingStatus.direction);
+      ? setSortingStatus({ by: sortBy, direction: 'ascending' })
+      : setSortingStatus({ by: sortBy, direction: null });
 
     if (sortBy === 'byName') {
       sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) =>
@@ -96,18 +95,27 @@ function CryptoList() {
             <th className='px-12 py-7 text-left'>Logo</th>
             <th className='px-12 py-7 text-left' onClick={() => setSortedData(sortTable('byName'))}>
               Name and Symbol
+              {sortingStatus.by === 'byName' && (
+                <SortTypeIndicator type={sortingStatus.direction} />
+              )}
             </th>
             <th
               className='px-12 py-7 text-left'
               onClick={() => setSortedData(sortTable('byPrice'))}
             >
               Price
+              {sortingStatus.by === 'byPrice' && (
+                <SortTypeIndicator type={sortingStatus.direction} />
+              )}
             </th>
             <th
               className='px-12 py-7 text-left rounded-r'
               onClick={() => setSortedData(sortTable('byVolume'))}
             >
               Volume (24h)
+              {sortingStatus.by === 'byVolume' && (
+                <SortTypeIndicator type={sortingStatus.direction} />
+              )}
             </th>
           </tr>
         </thead>
