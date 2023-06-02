@@ -40,14 +40,23 @@ function CryptoList() {
 
   type sortingTypes = 'byName' | 'byPrice' | 'byVolume';
 
+  function changeOrder() {
+    sortingStatus.direction === null
+      ? setSortingStatus({ ...sortingStatus, direction: 'descending' })
+      : sortingStatus.direction === 'descending'
+      ? setSortingStatus({ ...sortingStatus, direction: 'ascending' })
+      : setSortingStatus({ ...sortingStatus, direction: null });
+    console.log(sortingStatus.direction);
+  }
+
   function sortTable(sortBy: sortingTypes): Coin[] {
+    changeOrder();
     let sortedData;
 
-    sortingStatus.direction === null
-      ? setSortingStatus({ by: sortBy, direction: 'descending' })
-      : sortingStatus.direction === 'descending'
-      ? setSortingStatus({ by: sortBy, direction: 'ascending' })
-      : setSortingStatus({ by: sortBy, direction: null });
+    if (sortingStatus.direction === null) {
+      sortedData = data.data;
+      return sortedData;
+    }
 
     if (sortBy === 'byName') {
       sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) =>
@@ -56,12 +65,16 @@ function CryptoList() {
     }
     if (sortBy === 'byPrice') {
       sortedData = [...data.data].sort(
-        (coin1: Coin, coin2: Coin) => coin2.quote.USD.price - coin1.quote.USD.price,
+        (coin1: Coin, coin2: Coin) =>
+          (coin2.quote.USD.price - coin1.quote.USD.price) *
+          (sortingStatus.direction === 'ascending' ? -1 : 1),
       );
     }
     if (sortBy === 'byVolume') {
       sortedData = [...data.data].sort(
-        (coin1: Coin, coin2: Coin) => coin2.quote.USD.volume_24h - coin1.quote.USD.volume_24h,
+        (coin1: Coin, coin2: Coin) =>
+          (coin2.quote.USD.volume_24h - coin1.quote.USD.volume_24h) *
+          (sortingStatus.direction === 'ascending' ? -1 : 1),
       );
     }
     return sortedData as Coin[];
