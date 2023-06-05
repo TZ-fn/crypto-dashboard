@@ -41,17 +41,17 @@ function CryptoList() {
   type sortingTypes = 'byName' | 'byPrice' | 'byVolume';
 
   function changeOrder() {
-    sortingStatus.direction === null
-      ? setSortingStatus({ ...sortingStatus, direction: 'descending' })
+    return sortingStatus.direction === null
+      ? 'descending'
       : sortingStatus.direction === 'descending'
-      ? setSortingStatus({ ...sortingStatus, direction: 'ascending' })
-      : setSortingStatus({ ...sortingStatus, direction: null });
-    console.log(sortingStatus.direction);
+      ? 'ascending'
+      : null;
   }
 
   function sortTable(sortBy: sortingTypes): Coin[] {
-    changeOrder();
     let sortedData;
+
+    console.log(sortingStatus);
 
     if (sortingStatus.direction === null) {
       sortedData = data.data;
@@ -114,7 +114,11 @@ function CryptoList() {
             </th>
             <th
               className='px-12 py-7 text-left'
-              onClick={() => setSortedData(sortTable('byPrice'))}
+              onClick={() => {
+                setSortingStatus({ by: 'byPrice', direction: changeOrder() });
+                setSortedData(sortTable('byPrice'));
+                console.log(sortingStatus);
+              }}
             >
               Price
               {sortingStatus.by === 'byPrice' && (
