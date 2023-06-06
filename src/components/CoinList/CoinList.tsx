@@ -66,15 +66,19 @@ function CryptoList() {
     if (sortBy === 'byPrice') {
       sortedData = [...data.data].sort(
         (coin1: Coin, coin2: Coin) =>
-          (coin2.quote.USD.price - coin1.quote.USD.price) *
-          (sortingStatus.direction === 'ascending' ? -1 : 1),
+          new Intl.Collator('en', { numeric: true }).compare(
+            String(coin2.quote.USD.price),
+            String(coin1.quote.USD.price),
+          ) * (sortingStatus.direction === 'ascending' ? -1 : 1),
       );
     }
     if (sortBy === 'byVolume') {
       sortedData = [...data.data].sort(
         (coin1: Coin, coin2: Coin) =>
-          (coin2.quote.USD.volume_24h - coin1.quote.USD.volume_24h) *
-          (sortingStatus.direction === 'ascending' ? -1 : 1),
+          new Intl.Collator('en', { numeric: true }).compare(
+            String(coin2.quote.USD.volume_24h),
+            String(coin1.quote.USD.volume_24h),
+          ) * (sortingStatus.direction === 'ascending' ? -1 : 1),
       );
     }
     return sortedData as Coin[];
