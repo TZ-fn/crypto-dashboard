@@ -59,8 +59,10 @@ function CryptoList() {
     }
 
     if (sortBy === 'byName') {
-      sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) =>
-        new Intl.Collator('en').compare(coin1.name, coin2.name),
+      sortedData = [...data.data].sort(
+        (coin1: Coin, coin2: Coin) =>
+          new Intl.Collator('en').compare(coin1.name, coin2.name) *
+          (sortingStatus.direction === 'ascending' ? -1 : 1),
       );
     }
     if (sortBy === 'byPrice') {
@@ -110,7 +112,13 @@ function CryptoList() {
           <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
             <th className='px-12 py-7 text-left rounded-l'>#</th>
             <th className='px-12 py-7 text-left'>Logo</th>
-            <th className='px-12 py-7 text-left' onClick={() => setSortedData(sortTable('byName'))}>
+            <th
+              className='px-12 py-7 text-left'
+              onClick={() => {
+                setSortingStatus({ by: 'byName', direction: changeOrder() });
+                setSortedData(sortTable('byName'));
+              }}
+            >
               Name and Symbol
               {sortingStatus.by === 'byName' && (
                 <SortTypeIndicator type={sortingStatus.direction} />
@@ -121,7 +129,6 @@ function CryptoList() {
               onClick={() => {
                 setSortingStatus({ by: 'byPrice', direction: changeOrder() });
                 setSortedData(sortTable('byPrice'));
-                console.log(sortingStatus);
               }}
             >
               Price
@@ -131,7 +138,10 @@ function CryptoList() {
             </th>
             <th
               className='px-12 py-7 text-left rounded-r'
-              onClick={() => setSortedData(sortTable('byVolume'))}
+              onClick={() => {
+                setSortingStatus({ by: 'byVolume', direction: changeOrder() });
+                setSortedData(sortTable('byVolume'));
+              }}
             >
               Volume (24h)
               {sortingStatus.by === 'byVolume' && (
