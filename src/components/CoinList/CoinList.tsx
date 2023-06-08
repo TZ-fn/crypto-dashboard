@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import CoinListItem from './CoinListItem/CoinListItem';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import formatCurrency from 'utils/formatCurrency';
+import ContextType from 'types/ContextType';
+import sortTable from 'utils/sortTable';
+import SortTypeIndicator from 'components/SortTypeIndicator/SortTypeIndicator';
 import CoinsContext from 'context/CoinsContext';
 import Coin from 'types/Coin';
-import ContextType from 'types/ContextType';
-import SortTypeIndicator from 'components/SortTypeIndicator/SortTypeIndicator';
 
 function CryptoList() {
   const contextData = useContext(CoinsContext) as ContextType;
@@ -38,52 +39,12 @@ function CryptoList() {
     }
   }
 
-  type sortingTypes = 'byName' | 'byPrice' | 'byVolume';
-
   function changeOrder() {
     return sortingStatus.direction === null
       ? 'descending'
       : sortingStatus.direction === 'descending'
       ? 'ascending'
       : null;
-  }
-
-  function sortTable(sortBy: sortingTypes): Coin[] {
-    let sortedData;
-
-    console.log(sortingStatus);
-
-    if (sortingStatus.direction === null) {
-      sortedData = data.data;
-      return sortedData;
-    }
-
-    if (sortBy === 'byName') {
-      sortedData = [...data.data].sort(
-        (coin1: Coin, coin2: Coin) =>
-          new Intl.Collator('en').compare(coin1.name, coin2.name) *
-          (sortingStatus.direction === 'ascending' ? -1 : 1),
-      );
-    }
-    if (sortBy === 'byPrice') {
-      sortedData = [...data.data].sort(
-        (coin1: Coin, coin2: Coin) =>
-          new Intl.Collator('en', { numeric: true }).compare(
-            String(coin2.quote.USD.price),
-            String(coin1.quote.USD.price),
-          ) * (sortingStatus.direction === 'ascending' ? -1 : 1),
-      );
-    }
-    if (sortBy === 'byVolume') {
-      sortedData = [...data.data].sort(
-        (coin1: Coin, coin2: Coin) =>
-          new Intl.Collator('en', { numeric: true }).compare(
-            String(coin2.quote.USD.volume_24h),
-            String(coin1.quote.USD.volume_24h),
-          ) * (sortingStatus.direction === 'ascending' ? -1 : 1),
-      );
-    }
-    return sortedData as Coin[];
   }
 
   if (isLoading || metaIsFetching) return <LoadingSpinner />;
@@ -110,13 +71,13 @@ function CryptoList() {
       <table className='px-2 w-full max-w-6xl border-separate border-spacing-y-3'>
         <thead>
           <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
-            <th className='px-12 py-7 text-left rounded-l'>#</th>
-            <th className='px-12 py-7 text-left'>Logo</th>
+            <th className='px-12 py-7 text-left select-none rounded-l'>#</th>
+            <th className='px-12 py-7 text-left select-none'>Logo</th>
             <th
-              className='px-12 py-7 text-left'
+              className='px-12 py-7 text-left select-none'
               onClick={() => {
                 setSortingStatus({ by: 'byName', direction: changeOrder() });
-                setSortedData(sortTable('byName'));
+                setSortedData(sortTable('byName', sortingStatus.direction, data));
               }}
             >
               Name and Symbol
@@ -125,10 +86,10 @@ function CryptoList() {
               )}
             </th>
             <th
-              className='px-12 py-7 text-left'
+              className='px-12 py-7 text-left select-none'
               onClick={() => {
                 setSortingStatus({ by: 'byPrice', direction: changeOrder() });
-                setSortedData(sortTable('byPrice'));
+                setSortedData(sortTable('byPrice', sortingStatus.direction, data));
               }}
             >
               Price
@@ -137,10 +98,10 @@ function CryptoList() {
               )}
             </th>
             <th
-              className='px-12 py-7 text-left rounded-r'
+              className='px-12 py-7 text-left select-none rounded-r'
               onClick={() => {
                 setSortingStatus({ by: 'byVolume', direction: changeOrder() });
-                setSortedData(sortTable('byVolume'));
+                setSortedData(sortTable('byVolume', sortingStatus.direction, data));
               }}
             >
               Volume (24h)
