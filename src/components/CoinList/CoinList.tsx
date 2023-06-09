@@ -39,13 +39,12 @@ function CryptoList() {
     }
   }
 
-  function changeOrder() {
-    return sortingStatus.direction === null
+  const changeOrder =
+    sortingStatus.direction === null
       ? 'descending'
       : sortingStatus.direction === 'descending'
       ? 'ascending'
       : null;
-  }
 
   if (isLoading || metaIsFetching) return <LoadingSpinner />;
 
@@ -76,7 +75,7 @@ function CryptoList() {
             <th
               className='px-12 py-7 text-left select-none'
               onClick={() => {
-                setSortingStatus({ by: 'byName', direction: changeOrder() });
+                setSortingStatus({ by: 'byName', direction: changeOrder });
                 setSortedData(sortTable('byName', sortingStatus.direction, data));
               }}
             >
@@ -88,7 +87,7 @@ function CryptoList() {
             <th
               className='px-12 py-7 text-left select-none'
               onClick={() => {
-                setSortingStatus({ by: 'byPrice', direction: changeOrder() });
+                setSortingStatus({ by: 'byPrice', direction: changeOrder });
                 setSortedData(sortTable('byPrice', sortingStatus.direction, data));
               }}
             >
@@ -100,7 +99,7 @@ function CryptoList() {
             <th
               className='px-12 py-7 text-left select-none rounded-r'
               onClick={() => {
-                setSortingStatus({ by: 'byVolume', direction: changeOrder() });
+                setSortingStatus({ by: 'byVolume', direction: changeOrder });
                 setSortedData(sortTable('byVolume', sortingStatus.direction, data));
               }}
             >
