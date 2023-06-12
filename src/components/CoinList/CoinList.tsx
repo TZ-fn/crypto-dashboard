@@ -76,7 +76,7 @@ function CryptoList() {
               className='px-12 py-7 text-left select-none'
               onClick={() => {
                 setSortingStatus({ by: 'byName', direction: changeOrder });
-                setSortedData(sortTable('byName', sortingStatus.direction, data));
+                setSortedData(sortTable('byName', changeOrder, data));
               }}
             >
               Name and Symbol
@@ -88,7 +88,7 @@ function CryptoList() {
               className='px-12 py-7 text-left select-none'
               onClick={() => {
                 setSortingStatus({ by: 'byPrice', direction: changeOrder });
-                setSortedData(sortTable('byPrice', sortingStatus.direction, data));
+                setSortedData(sortTable('byPrice', changeOrder, data));
               }}
             >
               Price
@@ -100,7 +100,7 @@ function CryptoList() {
               className='px-12 py-7 text-left select-none rounded-r'
               onClick={() => {
                 setSortingStatus({ by: 'byVolume', direction: changeOrder });
-                setSortedData(sortTable('byVolume', sortingStatus.direction, data));
+                setSortedData(sortTable('byVolume', changeOrder, data));
               }}
             >
               Volume (24h)
