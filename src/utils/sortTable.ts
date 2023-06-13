@@ -8,6 +8,8 @@ export default function sortTable(
   data: { data: Coin[] },
 ): Coin[] {
   let sortedData;
+  const directionModifier = direction === 'ascending' ? -1 : 1;
+  const isNumeric = sortBy !== 'byName' ? true : false;
 
   if (direction === null) {
     sortedData = data.data;
@@ -17,27 +19,37 @@ export default function sortTable(
   if (sortBy === 'byName') {
     sortedData = [...data.data].sort(
       (coin1: Coin, coin2: Coin) =>
-        new Intl.Collator('en').compare(coin1.name, coin2.name) *
-        (direction === 'ascending' ? -1 : 1),
+        new Intl.Collator('en', { numeric: isNumeric }).compare(coin1.name, coin2.name) *
+        directionModifier,
     );
   }
+
   if (sortBy === 'byPrice') {
     sortedData = [...data.data].sort(
       (coin1: Coin, coin2: Coin) =>
-        new Intl.Collator('en', { numeric: true }).compare(
+        new Intl.Collator('en', { numeric: isNumeric }).compare(
           String(coin2.quote.USD.price),
           String(coin1.quote.USD.price),
-        ) * (direction === 'ascending' ? -1 : 1),
+        ) * directionModifier,
     );
   }
+
   if (sortBy === 'byVolume') {
     sortedData = [...data.data].sort(
       (coin1: Coin, coin2: Coin) =>
-        new Intl.Collator('en', { numeric: true }).compare(
+        new Intl.Collator('en', { numeric: isNumeric }).compare(
           String(coin2.quote.USD.volume_24h),
           String(coin1.quote.USD.volume_24h),
-        ) * (direction === 'ascending' ? -1 : 1),
+        ) * directionModifier,
     );
   }
+
   return sortedData as Coin[];
+
+  // return (sortedData = [...data.data].sort(
+  //   (coin1: Coin, coin2: Coin) =>
+  //     new Intl.Collator('en', { numeric: isNumeric }).compare(
+
+  //     ) * directionModifier,
+  // ));
 }
