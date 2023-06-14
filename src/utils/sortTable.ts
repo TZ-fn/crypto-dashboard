@@ -16,40 +16,32 @@ export default function sortTable(
     return sortedData;
   }
 
-  if (sortBy === 'byName') {
-    sortedData = [...data.data].sort(
-      (coin1: Coin, coin2: Coin) =>
+  sortedData = [...data.data].sort((coin1: Coin, coin2: Coin) => {
+    if (sortBy === 'byName') {
+      return (
         new Intl.Collator('en', { numeric: isNumeric }).compare(coin1.name, coin2.name) *
-        directionModifier,
-    );
-  }
+        directionModifier
+      );
+    }
 
-  if (sortBy === 'byPrice') {
-    sortedData = [...data.data].sort(
-      (coin1: Coin, coin2: Coin) =>
+    if (sortBy === 'byPrice') {
+      return (
         new Intl.Collator('en', { numeric: isNumeric }).compare(
           String(coin2.quote.USD.price),
           String(coin1.quote.USD.price),
-        ) * directionModifier,
-    );
-  }
+        ) * directionModifier
+      );
+    }
 
-  if (sortBy === 'byVolume') {
-    sortedData = [...data.data].sort(
-      (coin1: Coin, coin2: Coin) =>
+    if (sortBy === 'byVolume') {
+      return (
         new Intl.Collator('en', { numeric: isNumeric }).compare(
           String(coin2.quote.USD.volume_24h),
           String(coin1.quote.USD.volume_24h),
-        ) * directionModifier,
-    );
-  }
+        ) * directionModifier
+      );
+    }
+  });
 
   return sortedData as Coin[];
-
-  // return (sortedData = [...data.data].sort(
-  //   (coin1: Coin, coin2: Coin) =>
-  //     new Intl.Collator('en', { numeric: isNumeric }).compare(
-
-  //     ) * directionModifier,
-  // ));
 }
