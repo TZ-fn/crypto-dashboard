@@ -11,13 +11,8 @@ import PriceTrendIndicator from '../PriceTrendIndicator/PriceTrendIndicator';
 function CoinDetails() {
   let params = useParams();
   const contextData = useContext(CoinsContext) as ContextType;
-  const { isFetching, isLoading, data, error } = contextData.latestData;
-  const {
-    isFetching: metaIsFetching,
-    isLoading: metaIsLoading,
-    metaData,
-    error: metaError,
-  } = contextData.metaData;
+  const { isLoading, data, error } = contextData.latestData;
+  const { isLoading: metaIsLoading, metaData, error: metaError } = contextData.metaData;
 
   const currentCoinData = useMemo(() => {
     if (data) {
