@@ -11,12 +11,7 @@ import Coin from 'types/Coin';
 function CryptoList() {
   const contextData = useContext(CoinsContext) as ContextType;
   const { isFetching, isLoading, data, error } = contextData.latestData;
-  const {
-    isFetching: metaIsFetching,
-    isLoading: metaIsLoading,
-    metaData,
-    error: metaError,
-  } = contextData.metaData;
+  const { isFetching: metaIsFetching, metaData, error: metaError } = contextData.metaData;
 
   const [sortedData, setSortedData] = useState<null | Coin[]>(null);
   const [sortingStatus, setSortingStatus] = useState<{

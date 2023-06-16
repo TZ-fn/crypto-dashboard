@@ -41,6 +41,8 @@ export default function sortTable(
         ) * directionModifier
       );
     }
+
+    throw new Error('Sorting type is missing.');
   });
 
   return sortedData as Coin[];
