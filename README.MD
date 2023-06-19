@@ -2,11 +2,13 @@
 
 ## About
 
+This is a simple app for showing crypto coins' data. You can sort the columns or click every coin row to get more informations about the coin.
+
 ## Usage
 
 ## Live version
 
-The live version can be found [here]('').
+The live version can be found [here](https://crypto-dashboard-gamma-khaki.vercel.app/).
 
 ## Running the project locally
 
