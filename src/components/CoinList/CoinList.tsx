@@ -45,18 +45,18 @@ function CryptoList() {
 
   if (error && error instanceof Error)
     return (
-      <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's data has occurred: ${error.message}`}</div>
+      <div className='sm:px-2 px-04 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's data has occurred: ${error.message}`}</div>
     );
 
   if (metaError && metaError instanceof Error)
     return (
-      <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's logo has occurred: ${metaError.message}`}</div>
+      <div className='sm:px-2 px-04 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's logo has occurred: ${metaError.message}`}</div>
     );
 
   return (
     <>
       {isFetching && (
-        <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>
+        <div className='sm:px-2 px-04 py-6 text-center text-lg bg-bg-lighter'>
           Updating ...
           <LoadingSpinner />
         </div>
@@ -64,11 +64,13 @@ function CryptoList() {
 
       <table className='px-2 w-full max-w-6xl border-separate border-spacing-y-3'>
         <thead>
-          <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer text-lg'>
-            <th className='px-12 py-7 text-left select-none rounded-l'>#</th>
-            <th className='px-12 py-7 text-left select-none'>Logo</th>
+          <tr className='bg-bg-lighter-2 hover:bg-bg-lighter cursor-pointer'>
+            <th className='lg:px-12 md:px-4 sm:px-2 px-1 py-7 text-left select-none rounded-l'>
+              #
+            </th>
+            <th className='lg:px-12 md:px-4 sm:px-2 px-0 py-7 text-left select-none'>Logo</th>
             <th
-              className='px-12 py-7 text-left select-none'
+              className='lg:px-12 md:px-4 sm:px-2 px-0 py-7 text-left select-none'
               onClick={() => {
                 setSortingStatus({ by: 'byName', direction: changeOrder });
                 setSortedData(sortTable('byName', changeOrder, data));
@@ -80,7 +82,7 @@ function CryptoList() {
               )}
             </th>
             <th
-              className='px-12 py-7 text-left select-none'
+              className='lg:px-12 md:px-4 sm:px-2 px-0 py-7 text-left select-none'
               onClick={() => {
                 setSortingStatus({ by: 'byPrice', direction: changeOrder });
                 setSortedData(sortTable('byPrice', changeOrder, data));
@@ -92,7 +94,7 @@ function CryptoList() {
               )}
             </th>
             <th
-              className='px-12 py-7 text-left select-none rounded-r'
+              className='lg:px-12 md:px-4 sm:px-2 px-1 py-7 text-left select-none rounded-r'
               onClick={() => {
                 setSortingStatus({ by: 'byVolume', direction: changeOrder });
                 setSortedData(sortTable('byVolume', changeOrder, data));
