@@ -55,7 +55,7 @@ function CoinDetails() {
   const priceTrend = currentCoinData.quote.USD.percent_change_24h > 0 ? 'up' : 'down';
 
   return (
-    <div className='px-24 py-6 w-full flex items-center justify-center flex-col gap-4 bg-bg-lighter rounded'>
+    <div className='px-24 py-6 w-full flex items-center justify-center flex-col max-w-6xl gap-4 bg-bg-lighter rounded'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
       <p className='max-w-[60rem] text-l'>{currentCoinMetaData.description}</p>

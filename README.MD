@@ -6,6 +6,8 @@ This is a simple app for showing crypto coins' data. You can sort the columns or
 
 ## Usage
 
+User can check Coin's logo, name and symbol, price and volume over 24 hours. They can sort coins by the name, price or volume. Additionally every coin's row is clickable and redirects to a page with current coin's details.
+
 ## Live version
 
 The live version can be found [here](https://crypto-dashboard-gamma-khaki.vercel.app/).
