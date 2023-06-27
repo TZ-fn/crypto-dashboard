@@ -30,6 +30,27 @@ function CoinDetails() {
     }
   }, [metaData]);
 
+  const getLinkFromDescription = (defaultDescription: string) => {
+    const addressRegex =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+
+    const link = (address: string) => {
+      return <a href={address}>{address}</a>;
+    };
+
+    const description = defaultDescription.replace(addressRegex, '');
+    const address = defaultDescription
+      .match(addressRegex)[0]
+      .replace(/(https|http)?(:\/\/)?(\/\.)?/g, '');
+
+    return (
+      <>
+        {description}
+        {address ? link(address) : 'Address not available.'}
+      </>
+    );
+  };
+
   if (isLoading || metaIsLoading) return <LoadingSpinner />;
 
   if (error && error instanceof Error) {
@@ -58,7 +79,9 @@ function CoinDetails() {
     <div className='px-24 py-6 w-full flex items-center justify-center flex-col max-w-6xl gap-4 bg-bg-lighter rounded'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
-      <p className='max-w-[60rem] text-l'>{currentCoinMetaData.description}</p>
+      <p className='max-w-[60rem] text-l'>
+        {getLinkFromDescription(currentCoinMetaData.description)}
+      </p>
       <p className='text-2xl flex items-center justify-center'>
         Current price: {formatCurrency(currentCoinData.quote.USD.price)}
         <PriceTrendIndicator trend={priceTrend} />
