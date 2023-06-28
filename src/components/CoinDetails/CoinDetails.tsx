@@ -35,13 +35,19 @@ function CoinDetails() {
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
 
     const link = (address: string) => {
-      return <a href={address}>{address}</a>;
+      return (
+        <a className='underline' href={address}>
+          {address}
+        </a>
+      );
     };
 
     const description = defaultDescription.replace(addressRegex, '');
-    const address = defaultDescription
-      .match(addressRegex)[0]
-      .replace(/(https|http)?(:\/\/)?(\/\.)?/g, '');
+    const addressMatch = defaultDescription.match(addressRegex) ? {} : [];
+    if (addressMatch !== null && defaultDescription.match(addressRegex)[0] !== null) {
+      defaultDescription.match(addressRegex)![0].replace(/(https|http)?(:\/+)?(\/\.+)?/g, '');
+    }
+    const address = '';
 
     return (
       <>
