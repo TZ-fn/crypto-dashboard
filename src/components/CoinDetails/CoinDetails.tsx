@@ -4,9 +4,10 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import CoinsContext from 'context/CoinsContext';
 import capitalise from 'utils/capitalise';
 import formatCurrency from 'utils/formatCurrency';
-import Coin from 'types/Coin';
 import ContextType from 'types/ContextType';
 import PriceTrendIndicator from '../PriceTrendIndicator/PriceTrendIndicator';
+import Coin from 'types/Coin';
+import CoinMeta from '~/types/CoinMeta';
 
 function CoinDetails() {
   let params = useParams();
@@ -14,7 +15,7 @@ function CoinDetails() {
   const { isLoading, data, error } = contextData.latestData;
   const { isLoading: metaIsLoading, metaData, error: metaError } = contextData.metaData;
 
-  const currentCoinData = useMemo(() => {
+  const currentCoinData: Coin = useMemo(() => {
     if (data) {
       return data.data.filter((coin: Coin) => {
         if (params.name) {
@@ -24,7 +25,7 @@ function CoinDetails() {
     }
   }, [data]);
 
-  const currentCoinMetaData = useMemo(() => {
+  const currentCoinMetaData: CoinMeta = useMemo(() => {
     if (data && metaData) {
       return metaData.data[currentCoinData.id];
     }
@@ -32,7 +33,7 @@ function CoinDetails() {
 
   const getLinkFromDescription = (defaultDescription: string) => {
     const addressRegex =
-      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,12}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
 
     const link = (href: string, address: string) => {
       return (
