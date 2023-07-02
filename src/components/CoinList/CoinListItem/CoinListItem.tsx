@@ -20,7 +20,11 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
     >
       <td className='lg:px-12 md:px-4 sm:px-2 px-1 py-6 rounded-l'>{index + 1}</td>
       <td className='lg:px-12 md:px-4 sm:px-2 px-0 py-6'>
-        {logo ? <img className='max-w-[2.6vw] ' src={logo} alt='' /> : <LoadingSpinner />}
+        {logo ? (
+          <img className='max-w-[2.6vw] min-w-[3rem]' src={logo} alt='' />
+        ) : (
+          <LoadingSpinner />
+        )}
       </td>
       <td className='lg:px-12 md:px-4 sm:px-2 px-0 py-6'>
         {name} - {symbol}
