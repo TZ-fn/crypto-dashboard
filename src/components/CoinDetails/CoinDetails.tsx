@@ -89,6 +89,11 @@ function CoinDetails() {
       <p className='max-w-[60rem] text-l'>
         {getLinkFromDescription(currentCoinMetaData.description)}
       </p>
+      <p>
+        {currentCoinMetaData.urls.reddit[0]
+          ? `Subreddit: ${currentCoinMetaData.urls.reddit[0]}`
+          : ''}
+      </p>
       <p className='text-2xl flex items-center justify-center'>
         Current price: {formatCurrency(currentCoinData.quote.USD.price)}
         <PriceTrendIndicator trend={priceTrend} />
