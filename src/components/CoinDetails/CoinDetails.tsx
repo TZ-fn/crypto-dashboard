@@ -90,9 +90,14 @@ function CoinDetails() {
         {getLinkFromDescription(currentCoinMetaData.description)}
       </p>
       <p>
-        {currentCoinMetaData.urls.reddit[0]
-          ? `Subreddit: ${currentCoinMetaData.urls.reddit[0]}`
-          : ''}
+        Subreddit:{' '}
+        {currentCoinMetaData.urls.reddit[0] ? (
+          <a className='underline' href={currentCoinMetaData.urls.reddit[0]}>
+            {currentCoinMetaData.urls.reddit[0]}
+          </a>
+        ) : (
+          ''
+        )}
       </p>
       <p className='text-2xl flex items-center justify-center'>
         Current price: {formatCurrency(currentCoinData.quote.USD.price)}
