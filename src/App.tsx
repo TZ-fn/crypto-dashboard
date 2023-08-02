@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CoinList from './components/CoinList/CoinList';
 import CoinDetails from './components/CoinDetails/CoinDetails';
 import Layout from './components/Layout/Layout';
