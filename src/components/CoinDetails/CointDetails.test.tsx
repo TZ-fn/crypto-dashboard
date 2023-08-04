@@ -9,6 +9,7 @@ function renderCoinDetailsWithRouter() {
 describe('CoinDetails', () => {
   it('renders CoinDetails', () => {
     renderCoinDetailsWithRouter();
-    expect(screen.getByRole('heading', { name: /crypto dashboard/i })).toBeInTheDocument();
+    expect(screen.getByText(/current price/i)).toBeInTheDocument();
+    expect(screen.getByText(/subreddit/i)).toBeInTheDocument();
   });
 });
