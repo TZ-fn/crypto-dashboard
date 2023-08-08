@@ -20,8 +20,6 @@ function renderCoinDetailsWithContext() {
   );
 }
 
-console.log(nameRegex);
-
 describe('CoinDetails', () => {
   it('renders CoinDetails', () => {
     renderCoinDetailsWithContext();
