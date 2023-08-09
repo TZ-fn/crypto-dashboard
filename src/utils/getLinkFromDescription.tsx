@@ -1,6 +1,6 @@
 const getLinkFromDescription = (defaultDescription: string) => {
   const addressRegex =
-    /(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,12}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+    /(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}[^www]\.[a-zA-Z0-9()]{1,12}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
 
   const link = (href: string, address: string) => {
     return (
