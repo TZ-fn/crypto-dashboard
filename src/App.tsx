@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import CoinContextProvider from './providers/CoinContextProvider';
 import CoinList from './components/CoinList/CoinList';
 import CoinDetails from './components/CoinDetails/CoinDetails';
 import Layout from './components/Layout/Layout';
@@ -11,12 +12,14 @@ function App() {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<CoinList />} />
-            <Route path='/details/:name' element={<CoinDetails />} />
-          </Route>
-        </Routes>
+        <CoinContextProvider>
+          <Routes>
+            <Route path='/' element={<Layout />}>
+              <Route index element={<CoinList />} />
+              <Route path='/details/:name' element={<CoinDetails />} />
+            </Route>
+          </Routes>
+        </CoinContextProvider>
       </QueryClientProvider>
     </div>
   );

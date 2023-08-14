@@ -5,11 +5,11 @@ import CoinContextProvider from '~/providers/CoinContextProvider';
 
 export default function Layout() {
   return (
-    <CoinContextProvider>
+    <>
       <Header />
       <MainView>
         <Outlet />
       </MainView>
-    </CoinContextProvider>
+    </>
   );
 }
