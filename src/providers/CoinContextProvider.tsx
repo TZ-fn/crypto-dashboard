@@ -44,8 +44,6 @@ export default function CoinContextProvider({ children }: CoinContextProviderPro
   };
 
   const coinContext = contextData;
-  const metaCoinData = coinContext?.metaData;
-  const latestCoinData = coinContext?.latestData;
 
   return <CoinsContext.Provider value={coinContext}>{children}</CoinsContext.Provider>;
 }

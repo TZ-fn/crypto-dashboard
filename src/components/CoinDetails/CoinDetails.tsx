@@ -1,10 +1,9 @@
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import CoinsContext from 'context/CoinsContext';
+import useCoinContext from 'hooks/useCoinContext';
 import capitalise from 'utils/capitalise';
 import formatCurrency from 'utils/formatCurrency';
-import ContextType from 'types/ContextType';
 import PriceTrendIndicator from '../PriceTrendIndicator/PriceTrendIndicator';
 import Coin from 'types/Coin';
 import CoinMeta from '~/types/CoinMeta';
@@ -12,7 +11,7 @@ import getLinkFromDescription from '~/utils/getLinkFromDescription';
 
 function CoinDetails() {
   let params = useParams();
-  const contextData = useContext(CoinsContext) as ContextType;
+  const contextData = useCoinContext();
   const { isLoading, data, error } = contextData.latestData;
   const { isLoading: metaIsLoading, metaData, error: metaError } = contextData.metaData;
 
