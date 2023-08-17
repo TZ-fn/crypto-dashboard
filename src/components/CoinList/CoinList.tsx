@@ -22,15 +22,11 @@ function CoinList() {
   });
 
   useEffect(() => {
-    if (data) {
-      setSortedData(data.data);
-    }
+    setSortedData(data.data);
   }, [data]);
 
   function getCoinLogo(coinID: number): string | undefined {
-    if (metaData) {
-      return metaData.data[coinID].logo;
-    }
+    return metaData.data[coinID].logo;
   }
 
   const changeOrder =

@@ -5,8 +5,6 @@ import useCoinContext from 'hooks/useCoinContext';
 import capitalise from 'utils/capitalise';
 import formatCurrency from 'utils/formatCurrency';
 import PriceTrendIndicator from '../PriceTrendIndicator/PriceTrendIndicator';
-import Coin from 'types/Coin';
-import CoinMeta from '~/types/CoinMeta';
 import getLinkFromDescription from '~/utils/getLinkFromDescription';
 
 function CoinDetails() {
@@ -15,20 +13,16 @@ function CoinDetails() {
   const { isLoading, data, error } = contextData.latestData;
   const { isLoading: metaIsLoading, metaData, error: metaError } = contextData.metaData;
 
-  const currentCoinData: Coin = useMemo(() => {
-    if (data) {
-      return data.data.filter((coin: Coin) => {
-        if (params.name) {
-          return coin.name.toLocaleLowerCase() === params.name.toLocaleLowerCase();
-        }
-      })[0];
-    }
+  const currentCoinData = useMemo(() => {
+    return data.data.filter((coin) => {
+      if (params.name) {
+        return coin.name.toLocaleLowerCase() === params.name.toLocaleLowerCase();
+      }
+    })[0];
   }, [data]);
 
-  const currentCoinMetaData: CoinMeta = useMemo(() => {
-    if (data && metaData) {
-      return metaData.data[currentCoinData.id];
-    }
+  const currentCoinMetaData = useMemo(() => {
+    return metaData.data[currentCoinData.id];
   }, [metaData]);
 
   if (isLoading || metaIsLoading) return <LoadingSpinner />;
