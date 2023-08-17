@@ -7,7 +7,7 @@ import sortTable from 'utils/sortTable';
 import SortTypeIndicator from 'components/SortTypeIndicator/SortTypeIndicator';
 import Coin from 'types/Coin';
 
-function CryptoList() {
+function CoinList() {
   const contextData = useCoinContext();
   const { isFetching, isLoading, data, error } = contextData.latestData;
   const { isFetching: metaIsFetching, metaData, error: metaError } = contextData.metaData;
@@ -135,4 +135,4 @@ function CryptoList() {
   );
 }
 
-export default CryptoList;
+export default CoinList;
