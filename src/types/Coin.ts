@@ -9,7 +9,7 @@ export default interface Coin {
   max_supply: number;
   circulating_supply: number;
   total_supply: number;
-  infinite_supply: false;
+  infinite_supply: boolean;
   platform: null;
   cmc_rank: number;
   self_reported_circulating_supply: null;
