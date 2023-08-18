@@ -11,7 +11,7 @@ export default interface ContextType {
   metaData: {
     isLoading: boolean;
     isFetching: boolean;
-    metaData: { data: CoinMeta[] };
+    metaData: { data: { [index: string]: CoinMeta } };
     error: unknown;
   };
 }
