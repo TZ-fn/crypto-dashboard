@@ -22,7 +22,9 @@ function CoinList() {
   });
 
   useEffect(() => {
-    setSortedData(data.data);
+    if (data) {
+      setSortedData(data.data);
+    }
   }, [data]);
 
   function getCoinLogo(coinID: number): string | undefined {
@@ -36,7 +38,7 @@ function CoinList() {
       ? 'ascending'
       : null;
 
-  if (isLoading || metaIsFetching) return <LoadingSpinner />;
+  if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
 
   if (error && error instanceof Error)
     return (

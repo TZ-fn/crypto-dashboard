@@ -14,18 +14,23 @@ function CoinDetails() {
   const { isLoading: metaIsLoading, metaData, error: metaError } = contextData.metaData;
 
   const currentCoinData = useMemo(() => {
-    return data.data.filter((coin) => {
-      if (params.name) {
-        return coin.name.toLocaleLowerCase() === params.name.toLocaleLowerCase();
-      }
-    })[0];
+    if (data) {
+      return data.data.filter((coin) => {
+        if (params.name) {
+          return coin.name.toLocaleLowerCase() === params.name.toLocaleLowerCase();
+        }
+      })[0];
+    }
   }, [data]);
 
   const currentCoinMetaData = useMemo(() => {
-    return metaData.data[currentCoinData.id];
+    if (currentCoinData) {
+      return metaData.data[currentCoinData.id];
+    }
   }, [metaData]);
 
-  if (isLoading || metaIsLoading) return <LoadingSpinner />;
+  if (isLoading || metaIsLoading || !currentCoinData || !currentCoinMetaData)
+    return <LoadingSpinner />;
 
   if (error && error instanceof Error) {
     return (
