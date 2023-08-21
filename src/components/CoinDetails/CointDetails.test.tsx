@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Params } from 'react-router-dom';
 import { vi } from 'vitest';
-import CoinsContext from 'context/CoinsContext';
 import mockedContextData from 'tests/mockedContextData';
 import CoinDetails from './CoinDetails';
+import CoinContextProvider from 'providers/CoinContextProvider';
 
 const coinsName = mockedContextData.latestData.data.data[0].name.toLocaleLowerCase();
 const nameRegex = new RegExp(coinsName, 'i');
@@ -13,22 +14,26 @@ function renderCoinDetailsWithContext() {
     useParams: (): Readonly<Params<string>> => ({ name: coinsName }),
   }));
 
+  const queryClient = new QueryClient();
+
   render(
-    <CoinsContext.Provider value={mockedContextData}>
-      <CoinDetails />
-    </CoinsContext.Provider>,
+    <QueryClientProvider client={queryClient}>
+      <CoinContextProvider>
+        <CoinDetails />
+      </CoinContextProvider>
+    </QueryClientProvider>,
   );
 }
 
 describe('CoinDetails', () => {
-  it('renders CoinDetails', () => {
+  it('renders CoinDetails', async () => {
     renderCoinDetailsWithContext();
-    expect(screen.getByText(/current price/i)).toBeInTheDocument();
-    expect(screen.getByText(/subreddit/i)).toBeInTheDocument();
+    expect(await screen.findByText(/current price/i)).toBeInTheDocument();
+    expect(await screen.findByText(/subreddit/i)).toBeInTheDocument();
   });
 
-  it("renders CoinDetails with current coin's data", () => {
+  it("renders CoinDetails with current coin's data", async () => {
     renderCoinDetailsWithContext();
-    expect(screen.getByRole('heading', { name: nameRegex })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: nameRegex })).toBeInTheDocument();
   });
 });
