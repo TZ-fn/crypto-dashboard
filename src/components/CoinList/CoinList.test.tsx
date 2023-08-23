@@ -21,6 +21,16 @@ function renderCoinListWithContext() {
 describe('CoinDetails', () => {
   it('renders CoinDetails', async () => {
     renderCoinListWithContext();
-    expect(await screen.findByRole('cell', { name: /bitcoin \- btc/i })).toBeInTheDocument();
+    expect(await screen.findByRole('columnheader', { name: /logo/i })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('columnheader', { name: /name and symbol/i }),
+    ).toBeInTheDocument();
+    expect(await screen.findByRole('columnheader', { name: /price/i })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('columnheader', { name: /volume \(24h\)/i }),
+    ).toBeInTheDocument();
   });
+
+  it('sets the descending order correctly', async () => {});
+  it('sets the ascending order correctly', async () => {});
 });
