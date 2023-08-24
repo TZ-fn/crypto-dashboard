@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import Header from './Header';
 
 function renderHeaderWithRouter() {
   render(
-    <BrowserRouter>
+    <MemoryRouter>
       <Header />
-    </BrowserRouter>,
+    </MemoryRouter>,
   );
 }
 
