@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import styles from './ErrorBoundary.module.scss';
+import MainLogo from '../Header/MainLogo/MainLogo';
 
 type ErrorBoundaryProps = {
   children: ReactNode;
@@ -28,7 +28,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <div className='flex flex-col mt-32 items-center'>
-          <p className='text-xl'>Something went wrong, please try again later.</p>
+          <MainLogo />
+          <p className='text-xl mt-6'>Something went wrong, please try again later.</p>
           <LoadingSpinner />
         </div>
       );
