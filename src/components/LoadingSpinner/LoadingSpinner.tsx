@@ -1,8 +1,8 @@
 function LoadingSpinner() {
   return (
     <div className='relative mt-8'>
-      <div className='w-20 h-20 border-bg-lighter border-4 rounded-full'></div>
-      <div className='w-20 h-20 border-text-primary border-t-4 animate-spin rounded-full absolute left-0 top-0'></div>
+      <div className='h-20 w-20 rounded-full border-4 border-bg-lighter'></div>
+      <div className='absolute left-0 top-0 h-20 w-20 animate-spin rounded-full border-t-4 border-text-primary'></div>
     </div>
   );
 }

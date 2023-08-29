@@ -34,19 +34,19 @@ function CoinDetails() {
 
   if (error && error instanceof Error) {
     return (
-      <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's data has occurred: ${error.message}`}</div>
+      <div className='bg-bg-lighter px-24 py-6 text-center text-lg'>{`An error while fetching coin's data has occurred: ${error.message}`}</div>
     );
   }
 
   if (metaError && metaError instanceof Error) {
     return (
-      <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>{`An error while fetching coin's logo has occurred: ${metaError.message}`}</div>
+      <div className='bg-bg-lighter px-24 py-6 text-center text-lg'>{`An error while fetching coin's logo has occurred: ${metaError.message}`}</div>
     );
   }
 
   if (!params.name) {
     return (
-      <div className='px-24 py-6 text-center text-lg bg-bg-lighter'>
+      <div className='bg-bg-lighter px-24 py-6 text-center text-lg'>
         Please select a coin to get it's details.
       </div>
     );
@@ -55,10 +55,10 @@ function CoinDetails() {
   const priceTrend = currentCoinData.quote.USD.percent_change_24h > 0 ? 'up' : 'down';
 
   return (
-    <div className='lg:px-24 md:px-8 px-4 py-6 w-full flex items-center justify-center flex-col max-w-6xl gap-4 bg-bg-lighter rounded'>
+    <div className='flex w-full max-w-6xl flex-col items-center justify-center gap-4 rounded bg-bg-lighter px-4 py-6 md:px-8 lg:px-24'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
-      <p className='max-w-[60rem] text-l'>
+      <p className='text-l max-w-[60rem]'>
         {getLinkFromDescription(currentCoinMetaData.description)}
       </p>
       <p>
@@ -71,7 +71,7 @@ function CoinDetails() {
           ''
         )}
       </p>
-      <p className='text-2xl flex items-center justify-center'>
+      <p className='flex items-center justify-center text-2xl'>
         Current price: {formatCurrency(currentCoinData.quote.USD.price)}
         <PriceTrendIndicator trend={priceTrend} />
       </p>

@@ -2,7 +2,7 @@ import MainLogo from './MainLogo/MainLogo';
 
 function Header() {
   return (
-    <header className='py-6 px-12 bg-bg border-b border-border'>
+    <header className='border-b border-border bg-bg px-12 py-6'>
       <MainLogo />
     </header>
   );
