@@ -6,11 +6,17 @@ export default interface Coin {
   num_market_pairs: number;
   date_added: string;
   tags: string[];
-  max_supply: number;
+  max_supply: number | null;
   circulating_supply: number;
   total_supply: number;
   infinite_supply: boolean;
-  platform: null;
+  platform: {
+    id: number;
+    name: string;
+    symbol: string;
+    slug: string;
+    token_address: string;
+  } | null;
   cmc_rank: number;
   self_reported_circulating_supply: null;
   self_reported_market_cap: null;
