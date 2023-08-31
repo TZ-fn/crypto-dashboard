@@ -1,14 +1,13 @@
 import sortTable from './sortTable';
 import mockedListData from '../tests/mockedListData';
-import {
-  defaultSorting,
-  nameSortingAscending,
-  nameSortingDescending,
-  priceSortingAscending,
-  priceSortingDescending,
-  volumeSortingAscending,
-  volumeSortingDescending,
-} from 'tests/listSortingMocks';
+
+const defaultSorting = mockedListData.data[0];
+const nameSortingDescending = mockedListData.data[0];
+const nameSortingAscending = mockedListData.data[4];
+const priceSortingDescending = mockedListData.data[0];
+const priceSortingAscending = mockedListData.data[7];
+const volumeSortingDescending = mockedListData.data[2];
+const volumeSortingAscending = mockedListData.data[6];
 
 describe('sortTable', () => {
   it('sorts the table alphabetically', () => {
