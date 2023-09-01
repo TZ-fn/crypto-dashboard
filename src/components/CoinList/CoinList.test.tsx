@@ -8,10 +8,12 @@ import mockedContextData from '~/tests/mockedContextData';
 
 vi.mock('@tanstack/react-query', async () => {
   const actual = await vi.importActual('@tanstack/react-query');
-  return {
-    ...actual,
-    useQuery: vi.fn().mockReturnValue({ data: { data: [] }, isLoading: false, error: {} }),
-  };
+  if (typeof actual === 'object') {
+    return {
+      ...actual,
+      useQuery: vi.fn().mockReturnValue({ data: { data: [] }, isLoading: false, error: {} }),
+    };
+  }
 });
 
 function renderCoinListWithContext() {
@@ -39,6 +41,7 @@ describe('CoinDetails', () => {
     expect(
       await screen.findByRole('columnheader', { name: /volume \(24h\)/i }),
     ).toBeInTheDocument();
+    screen.debug();
   });
 
   it('sets the descending order correctly', async () => {});
