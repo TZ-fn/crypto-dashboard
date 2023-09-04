@@ -4,14 +4,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import CoinContextProvider from 'providers/CoinContextProvider';
 import CoinList from './CoinList';
-import mockedContextData from '~/tests/mockedContextData';
+import mockedContextData from 'tests/mockedContextData';
 
-vi.mock('@tanstack/react-query', async () => {
+vi.doMock('@tanstack/react-query', async () => {
   const actual = await vi.importActual('@tanstack/react-query');
   if (typeof actual === 'object') {
     return {
       ...actual,
-      useQuery: vi.fn().mockReturnValue({ data: { data: [] }, isLoading: false, error: {} }),
+      useQuery: vi
+        .fn()
+        .mockReturnValue({ data: { data: mockedContextData }, isLoading: false, error: {} }),
     };
   }
 });
