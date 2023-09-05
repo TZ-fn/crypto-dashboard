@@ -1,9 +1,9 @@
 import { ReactNode, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import queryLatestData from '~/queryFunctions/queryLatestData';
-import queryMetaData from '~/queryFunctions/queryMetaData';
+import queryLatestData from 'queryFunctions/queryLatestData';
+import queryMetaData from 'queryFunctions/queryMetaData';
 import CoinsContext from 'context/CoinsContext';
-import Coin from '~/types/Coin';
+import Coin from 'types/Coin';
 
 interface CoinContextProviderProps {
   children: ReactNode;
