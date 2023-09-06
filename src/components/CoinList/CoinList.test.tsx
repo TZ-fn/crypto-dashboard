@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import CoinList from './CoinList';
-import mockedContextData from '~/tests/mockedContextData';
+import mockedContextData from 'tests/mockedContextData';
 import CoinsContext from 'context/CoinsContext';
 
 function renderCoinListWithContext() {
@@ -15,6 +16,8 @@ function renderCoinListWithContext() {
 }
 
 describe('CoinDetails', () => {
+  const user = userEvent.setup();
+
   it('renders CoinDetails', async () => {
     renderCoinListWithContext();
     expect(await screen.findByRole('columnheader', { name: /logo/i })).toBeInTheDocument();
@@ -25,9 +28,15 @@ describe('CoinDetails', () => {
     expect(
       await screen.findByRole('columnheader', { name: /volume \(24h\)/i }),
     ).toBeInTheDocument();
-    screen.debug();
   });
 
-  it('sets the descending order correctly', async () => {});
-  it('sets the ascending order correctly', async () => {});
+  it('sets the descending order correctly', async () => {
+    renderCoinListWithContext();
+    const nameHeader = screen.getByRole('columnheader', { name: /name and symbol/i });
+
+    await user.click(nameHeader);
+    await user.click(nameHeader);
+
+    screen.debug();
+  });
 });
