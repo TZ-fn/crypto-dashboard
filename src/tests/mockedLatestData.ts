@@ -1,4 +1,4 @@
-const mockedListData = {
+const mockedLatestData = {
   data: [
     {
       id: 1,
@@ -484,4 +484,4 @@ const mockedListData = {
   ],
 };
 
-export default mockedListData;
+export default mockedLatestData;

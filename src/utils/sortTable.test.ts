@@ -1,36 +1,38 @@
 import sortTable from './sortTable';
-import mockedListData from '../tests/mockedListData';
+import mockedLatestData from '../tests/mockedLatestData';
 
-const defaultSorting = mockedListData.data[0];
-const nameSortingDescending = mockedListData.data[0];
-const nameSortingAscending = mockedListData.data[4];
-const priceSortingDescending = mockedListData.data[0];
-const priceSortingAscending = mockedListData.data[7];
-const volumeSortingDescending = mockedListData.data[2];
-const volumeSortingAscending = mockedListData.data[6];
+const defaultSorting = mockedLatestData.data[0];
+const nameSortingDescending = mockedLatestData.data[0];
+const nameSortingAscending = mockedLatestData.data[4];
+const priceSortingDescending = mockedLatestData.data[0];
+const priceSortingAscending = mockedLatestData.data[7];
+const volumeSortingDescending = mockedLatestData.data[2];
+const volumeSortingAscending = mockedLatestData.data[6];
 
 describe('sortTable', () => {
   it('sorts the table alphabetically', () => {
-    expect(sortTable('byName', null, mockedListData)[0]).toEqual(defaultSorting);
+    expect(sortTable('byName', null, mockedLatestData)[0]).toEqual(defaultSorting);
 
-    expect(sortTable('byName', 'descending', mockedListData)[0]).toEqual(nameSortingDescending);
+    expect(sortTable('byName', 'descending', mockedLatestData)[0]).toEqual(nameSortingDescending);
 
-    expect(sortTable('byName', 'ascending', mockedListData)[0]).toEqual(nameSortingAscending);
+    expect(sortTable('byName', 'ascending', mockedLatestData)[0]).toEqual(nameSortingAscending);
   });
 
   it('sorts the table by price', () => {
-    expect(sortTable('byPrice', null, mockedListData)[0]).toEqual(defaultSorting);
+    expect(sortTable('byPrice', null, mockedLatestData)[0]).toEqual(defaultSorting);
 
-    expect(sortTable('byPrice', 'descending', mockedListData)[0]).toEqual(priceSortingDescending);
+    expect(sortTable('byPrice', 'descending', mockedLatestData)[0]).toEqual(priceSortingDescending);
 
-    expect(sortTable('byPrice', 'ascending', mockedListData)[0]).toEqual(priceSortingAscending);
+    expect(sortTable('byPrice', 'ascending', mockedLatestData)[0]).toEqual(priceSortingAscending);
   });
 
   it('sorts the table by volume', () => {
-    expect(sortTable('byVolume', null, mockedListData)[0]).toEqual(defaultSorting);
+    expect(sortTable('byVolume', null, mockedLatestData)[0]).toEqual(defaultSorting);
 
-    expect(sortTable('byVolume', 'descending', mockedListData)[0]).toEqual(volumeSortingDescending);
+    expect(sortTable('byVolume', 'descending', mockedLatestData)[0]).toEqual(
+      volumeSortingDescending,
+    );
 
-    expect(sortTable('byVolume', 'ascending', mockedListData)[0]).toEqual(volumeSortingAscending);
+    expect(sortTable('byVolume', 'ascending', mockedLatestData)[0]).toEqual(volumeSortingAscending);
   });
 });
