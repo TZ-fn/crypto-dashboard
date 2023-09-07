@@ -27,8 +27,8 @@ function CoinList() {
     }
   }, [data]);
 
-  function getCoinLogo(coinID: number): string | undefined {
-    return metaData.data[coinID].logo;
+  function getCoinLogo(coinID: number) {
+    return metaData.data[coinID]?.logo || null;
   }
 
   const changeOrder =

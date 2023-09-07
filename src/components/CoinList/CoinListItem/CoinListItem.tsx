@@ -3,7 +3,7 @@ import LoadingSpinner from '~/components/LoadingSpinner/LoadingSpinner';
 
 interface CoinListItemProps {
   index: number;
-  logo: string | undefined;
+  logo: string | null;
   name: string;
   symbol: string;
   price: string;
