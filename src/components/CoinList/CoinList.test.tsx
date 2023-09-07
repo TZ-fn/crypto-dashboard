@@ -30,13 +30,25 @@ describe('CoinDetails', () => {
     ).toBeInTheDocument();
   });
 
-  it('sets the descending order correctly', async () => {
+  it('changes the sorting indicator correctly', async () => {
     renderCoinListWithContext();
     const nameHeader = screen.getByRole('columnheader', { name: /name and symbol/i });
 
     await user.click(nameHeader);
+
+    expect(screen.getByRole('columnheader', { name: /name and symbol ▼/i })).toBeInTheDocument();
+
     await user.click(nameHeader);
 
-    screen.debug();
+    expect(screen.getByRole('columnheader', { name: /name and symbol ▲/i })).toBeInTheDocument();
+
+    await user.click(nameHeader);
+
+    expect(
+      screen.queryByRole('columnheader', { name: /name and symbol ▼/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('columnheader', { name: /name and symbol ▲/i }),
+    ).not.toBeInTheDocument();
   });
 });
