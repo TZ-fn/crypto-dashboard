@@ -15,10 +15,10 @@ function renderCoinListWithContext() {
   );
 }
 
-describe('CoinDetails', () => {
+describe('CoinList', () => {
   const user = userEvent.setup();
 
-  it('renders CoinDetails', async () => {
+  it('renders CoinList correctly', async () => {
     renderCoinListWithContext();
     expect(await screen.findByRole('columnheader', { name: /logo/i })).toBeInTheDocument();
     expect(
