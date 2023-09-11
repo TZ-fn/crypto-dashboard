@@ -4,7 +4,7 @@ import { Params } from 'react-router-dom';
 import { vi } from 'vitest';
 import mockedContextData from 'tests/mockedContextData';
 import CoinDetails from './CoinDetails';
-import CoinContextProvider from 'providers/CoinContextProvider';
+import CoinsContext from 'context/CoinsContext';
 
 const coinsName = mockedContextData.latestData.data.data[0].name.toLocaleLowerCase();
 const nameRegex = new RegExp(coinsName, 'i');
@@ -14,14 +14,10 @@ function renderCoinDetailsWithContext() {
     useParams: (): Readonly<Params<string>> => ({ name: coinsName }),
   }));
 
-  const queryClient = new QueryClient();
-
   render(
-    <QueryClientProvider client={queryClient}>
-      <CoinContextProvider>
-        <CoinDetails />
-      </CoinContextProvider>
-    </QueryClientProvider>,
+    <CoinsContext.Provider value={mockedContextData}>
+      <CoinDetails />
+    </CoinsContext.Provider>,
   );
 }
 
