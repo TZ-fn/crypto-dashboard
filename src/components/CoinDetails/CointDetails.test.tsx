@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Params } from 'react-router-dom';
 import { vi } from 'vitest';
 import mockedContextData from 'tests/mockedContextData';
