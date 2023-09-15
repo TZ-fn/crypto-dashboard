@@ -1,5 +1,15 @@
+import useFavourites from 'hooks/useFavourites';
+
 function Favourites() {
-  return <div className='flex'>Favourites</div>;
+  const [favourites, setFavourites] = useFavourites();
+
+  return (
+    <div className='flex'>
+      {favourites.map((favourite) => (
+        <p>{favourite}</p>
+      ))}
+    </div>
+  );
 }
 
 export default Favourites;
