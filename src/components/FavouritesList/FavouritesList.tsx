@@ -1,18 +1,18 @@
 import useFavourites from 'hooks/useFavourites';
 
-function Favourites() {
+function FavouritesList() {
   const [favourites, setFavourites] = useFavourites();
 
   return (
     <div className='flex'>
       {favourites.map((favourite, index) => (
-        <p key={index}>{favourite}</p>
+        <p key={index}>{favourite.name}</p>
       ))}
       <button
         className='mx-2'
         onClick={() => {
           if (typeof setFavourites === 'function') {
-            setFavourites([1, 2, 3, 4, 5]);
+            setFavourites([{ id: 1, name: 'asd', logo: 'sdf' }]);
           }
         }}
       >
@@ -22,4 +22,4 @@ function Favourites() {
   );
 }
 
-export default Favourites;
+export default FavouritesList;
