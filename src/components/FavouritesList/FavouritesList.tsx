@@ -1,8 +1,11 @@
 import useFavourites from 'hooks/useFavourites';
 import FavouritesListElement from './FavouritesListElement/FavouritesListElement';
+import useLocalStorage from '~/hooks/useLocalStorage';
 
 function FavouritesList() {
-  const [favourites, setFavourites] = useFavourites();
+  const [favourites, setFavourites] = useLocalStorage('favourites');
+
+  console.log(favourites);
 
   const deleteFromFavourites = (name: string) => {
     setFavourites((prev) => prev.filter((item) => item.name !== name));
@@ -21,16 +24,14 @@ function FavouritesList() {
       <button
         className='mx-2'
         onClick={() => {
-          if (typeof setFavourites === 'function') {
-            setFavourites((prev) => [
-              ...prev,
-              {
-                id: 1,
-                name: `BT${Math.random()}`,
-                logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
-              },
-            ]);
-          }
+          setFavourites((prev) => [
+            ...prev,
+            {
+              id: 1,
+              name: `BT${Math.random()}`,
+              logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
+            },
+          ]);
         }}
       >
         Click
