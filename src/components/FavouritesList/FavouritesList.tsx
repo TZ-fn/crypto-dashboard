@@ -12,7 +12,7 @@ function FavouritesList() {
     <ul className='flex flex-col'>
       {favourites.map(({ id, name, logo }) => (
         <FavouritesListElement
-          key={Math.random()}
+          key={id}
           name={name}
           logo={logo}
           deletingFunction={deleteFromFavourites}
