@@ -1,11 +1,8 @@
 import useFavourites from 'hooks/useFavourites';
 import FavouritesListElement from './FavouritesListElement/FavouritesListElement';
-import useLocalStorage from '~/hooks/useLocalStorage';
 
 function FavouritesList() {
-  const [favourites, setFavourites] = useLocalStorage('favourites');
-
-  console.log(favourites);
+  const [favourites, setFavourites] = useFavourites();
 
   const deleteFromFavourites = (name: string) => {
     setFavourites((prev) => prev.filter((item) => item.name !== name));

@@ -1,7 +1,7 @@
 import useLocalStorage from './useLocalStorage';
 
 const useFavourites = () => {
-  const [favourites, setFavourites] = useLocalStorage<FavouriteCoin[]>('favourites');
+  const [favourites, setFavourites] = useLocalStorage<FavouriteCoin[]>('favourites', []);
   return [favourites, setFavourites] as const;
 };
 
