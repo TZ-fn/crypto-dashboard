@@ -1,4 +1,5 @@
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import FavouriteCoin from 'types/FavouriteCoin';
 
 function FavouritesListElement({
   name,
