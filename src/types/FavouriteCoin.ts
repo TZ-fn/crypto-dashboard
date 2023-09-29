@@ -3,3 +3,5 @@ type FavouriteCoin = {
   name: string;
   logo?: string;
 };
+
+export default FavouriteCoin;
