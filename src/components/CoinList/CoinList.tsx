@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import CoinListItem from './CoinListItem/CoinListItem';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import useCoinContext from 'hooks/useCoinContext';
+import useFavourites from '~/hooks/useFavourites';
 import formatCurrency from 'utils/formatCurrency';
 import sortTable from 'utils/sortTable';
 import SortTypeIndicator from 'components/SortTypeIndicator/SortTypeIndicator';
@@ -21,6 +22,8 @@ function CoinList() {
     direction: null,
   });
 
+  const [favourites, setFavourites] = useFavourites();
+
   useEffect(() => {
     if (data) {
       setSortedData(data.data);
@@ -37,6 +40,26 @@ function CoinList() {
       : sortingStatus.direction === 'descending'
       ? 'ascending'
       : null;
+
+  const handleFavourites = (
+    id: number,
+    name: string,
+    logo: string | null,
+    e: MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    console.log(favourites);
+    if (!favourites.find((favourite) => favourite.name === name)) {
+      setFavourites((prev) => [
+        ...prev,
+        {
+          id: id,
+          name: name,
+          logo: logo,
+        },
+      ]);
+    }
+  };
 
   if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
 
@@ -124,6 +147,7 @@ function CoinList() {
                   symbol={symbol}
                   price={formatCurrency(price)}
                   volume24h={formatCurrency(volume_24h)}
+                  handleFavourites={handleFavourites}
                 />
               ),
             )}

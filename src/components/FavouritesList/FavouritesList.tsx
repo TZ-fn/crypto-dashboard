@@ -12,27 +12,13 @@ function FavouritesList() {
     <ul className='flex flex-col'>
       {favourites.map(({ id, name, logo }) => (
         <FavouritesListElement
-          key={id}
+          key={name}
           name={name}
           logo={logo}
           deletingFunction={deleteFromFavourites}
         />
       ))}
-      <button
-        className='mx-2'
-        onClick={() => {
-          setFavourites((prev) => [
-            ...prev,
-            {
-              id: 1,
-              name: `BT${Math.random()}`,
-              logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
-            },
-          ]);
-        }}
-      >
-        Click
-      </button>
+      <button className='mx-2'>Click</button>
       <button
         onClick={() => {
           setFavourites(() => []);

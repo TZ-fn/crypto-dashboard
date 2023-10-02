@@ -12,7 +12,7 @@ function FavouritesListElement({
       <p>{name}</p>
       <button
         onClick={() => deletingFunction(name)}
-        className='border-[1px] border-solid border-[transparent] px-1.5 hover:border-border'
+        className='ml-auto border-[1px] border-solid border-[transparent] px-1.5 hover:border-border'
       >
         X
       </button>
