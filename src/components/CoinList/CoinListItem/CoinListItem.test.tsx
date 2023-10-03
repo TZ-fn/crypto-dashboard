@@ -15,6 +15,7 @@ function renderCoinListItem() {
         symbol={'BTC'}
         price={formatCurrency(100)}
         volume24h={formatCurrency(50)}
+        handleFavourites={() => {}}
       />
     </MemoryRouter>,
   );

@@ -4,7 +4,7 @@ import LoadingSpinner from '~/components/LoadingSpinner/LoadingSpinner';
 
 interface CoinListItemProps {
   index: number;
-  logo: string | null;
+  logo: string | undefined;
   name: string;
   symbol: string;
   price: string;
@@ -12,8 +12,8 @@ interface CoinListItemProps {
   handleFavourites: (
     id: number,
     name: string,
-    logo: string | null,
-    e: MouseEvent<HTMLButtonElement, MouseEvent>,
+    logo: string | undefined,
+    e: MouseEvent<HTMLButtonElement>,
   ) => void;
 }
 

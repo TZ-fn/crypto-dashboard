@@ -31,7 +31,7 @@ function CoinList() {
   }, [data]);
 
   function getCoinLogo(coinID: number) {
-    return metaData.data[coinID]?.logo || null;
+    return metaData.data[coinID]?.logo || undefined;
   }
 
   const changeOrder =
@@ -44,8 +44,8 @@ function CoinList() {
   const handleFavourites = (
     id: number,
     name: string,
-    logo: string | null,
-    e: MouseEvent<HTMLButtonElement, MouseEvent>,
+    logo: string | undefined,
+    e: MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
     console.log(favourites);
@@ -53,9 +53,9 @@ function CoinList() {
       setFavourites((prev) => [
         ...prev,
         {
-          id: id,
-          name: name,
-          logo: logo,
+          id,
+          name,
+          logo,
         },
       ]);
     }
