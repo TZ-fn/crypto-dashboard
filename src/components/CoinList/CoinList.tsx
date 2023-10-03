@@ -48,7 +48,6 @@ function CoinList() {
     e: MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
-    console.log(favourites);
     if (!favourites.find((favourite) => favourite.name === name)) {
       setFavourites((prev) => [
         ...prev,
