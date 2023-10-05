@@ -22,8 +22,6 @@ function CoinList() {
     direction: null,
   });
 
-  const [favourites, setFavourites] = useFavourites();
-
   useEffect(() => {
     if (data) {
       setSortedData(data.data);
@@ -40,25 +38,6 @@ function CoinList() {
       : sortingStatus.direction === 'descending'
       ? 'ascending'
       : null;
-
-  const handleFavourites = (
-    id: number,
-    name: string,
-    logo: string | undefined,
-    e: MouseEvent<HTMLButtonElement>,
-  ) => {
-    e.preventDefault();
-    if (!favourites.find((favourite) => favourite.name === name)) {
-      setFavourites((prev) => [
-        ...prev,
-        {
-          id,
-          name,
-          logo,
-        },
-      ]);
-    }
-  };
 
   if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
 
@@ -146,7 +125,6 @@ function CoinList() {
                   symbol={symbol}
                   price={formatCurrency(price)}
                   volume24h={formatCurrency(volume_24h)}
-                  handleFavourites={handleFavourites}
                 />
               ),
             )}

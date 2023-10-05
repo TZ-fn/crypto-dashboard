@@ -4,9 +4,7 @@ import FavouritesListElement from './FavouritesListElement/FavouritesListElement
 function FavouritesList() {
   const [favourites, setFavourites] = useFavourites();
 
-  const deleteFromFavourites = (name: string) => {
-    setFavourites((prev) => prev.filter((item) => item.name !== name));
-  };
+  console.log(favourites);
 
   return (
     <ul className='flex flex-col'>
@@ -15,10 +13,9 @@ function FavouritesList() {
           key={name}
           name={name}
           logo={logo}
-          deletingFunction={deleteFromFavourites}
+          deletingFunction={setFavourites}
         />
       ))}
-      <button className='mx-2'>Click</button>
       <button
         onClick={() => {
           setFavourites(() => []);

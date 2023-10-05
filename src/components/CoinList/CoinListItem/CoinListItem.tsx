@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoadingSpinner from '~/components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import useFavourites from 'hooks/useFavourites';
 
 interface CoinListItemProps {
   index: number;
@@ -9,24 +10,11 @@ interface CoinListItemProps {
   symbol: string;
   price: string;
   volume24h: string;
-  handleFavourites: (
-    id: number,
-    name: string,
-    logo: string | undefined,
-    e: MouseEvent<HTMLButtonElement>,
-  ) => void;
 }
 
-function CoinListItem({
-  index,
-  logo,
-  name,
-  symbol,
-  price,
-  volume24h,
-  handleFavourites,
-}: CoinListItemProps) {
+function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListItemProps) {
   const navigate = useNavigate();
+  const [favourites, handleFavourites] = useFavourites();
 
   return (
     <tr
@@ -47,7 +35,7 @@ function CoinListItem({
       <td className='px-0 py-6 sm:px-2 md:px-4 lg:px-12'>{price}</td>
       <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>{volume24h}</td>
       <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>
-        <button onClick={(e) => handleFavourites(index, name, logo, e)}>Favourites</button>
+        <button onClick={(e) => handleFavourites(name, logo, e)}>Favourites</button>
       </td>
     </tr>
   );
