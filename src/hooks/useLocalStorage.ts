@@ -1,23 +1,25 @@
-const dispatchStorageEvent = (key, newValue) => {
+import { useCallback, useEffect, useSyncExternalStore } from 'react';
+
+const dispatchStorageEvent = <T extends string | null | undefined>(key: string, newValue: T) => {
   window.dispatchEvent(new StorageEvent('storage', { key, newValue }));
 };
 
-const setLocalStorageItem = (key, value) => {
+const setLocalStorageItem = <T>(key: string, value: T) => {
   const stringifiedValue = JSON.stringify(value);
   window.localStorage.setItem(key, stringifiedValue);
   dispatchStorageEvent(key, stringifiedValue);
 };
 
-const removeLocalStorageItem = (key) => {
+const removeLocalStorageItem = (key: string) => {
   window.localStorage.removeItem(key);
   dispatchStorageEvent(key, null);
 };
 
-const getLocalStorageItem = (key) => {
+const getLocalStorageItem = (key: string) => {
   return window.localStorage.getItem(key);
 };
 
-const useLocalStorageSubscribe = (callback) => {
+const useLocalStorageSubscribe = (callback: (this: Window, ev: StorageEvent) => any) => {
   window.addEventListener('storage', callback);
   return () => window.removeEventListener('storage', callback);
 };
@@ -26,17 +28,17 @@ const getLocalStorageServerSnapshot = () => {
   throw Error('useLocalStorage is a client-only hook');
 };
 
-export function useLocalStorage(key, initialValue) {
+function useLocalStorage<T>(key: string, initialValue: T): [T[], setState: (v: T) => void] {
   const getSnapshot = () => getLocalStorageItem(key);
 
-  const store = React.useSyncExternalStore(
+  const store = useSyncExternalStore(
     useLocalStorageSubscribe,
     getSnapshot,
     getLocalStorageServerSnapshot,
   );
 
-  const setState = React.useCallback(
-    (v) => {
+  const setState = useCallback(
+    (v: T) => {
       try {
         const nextState = typeof v === 'function' ? v(JSON.parse(store)) : v;
 
@@ -52,7 +54,7 @@ export function useLocalStorage(key, initialValue) {
     [key, store],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (getLocalStorageItem(key) === null && typeof initialValue !== 'undefined') {
       setLocalStorageItem(key, initialValue);
     }
@@ -60,3 +62,5 @@ export function useLocalStorage(key, initialValue) {
 
   return [store ? JSON.parse(store) : initialValue, setState];
 }
+
+export default useLocalStorage;

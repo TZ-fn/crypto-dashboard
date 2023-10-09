@@ -2,7 +2,7 @@ import useLocalStorage from './useLocalStorage';
 import FavouriteCoin from 'types/FavouriteCoin';
 
 const useFavourites = () => {
-  const [favourites, setFavourites] = useLocalStorage<FavouriteCoin[]>('favourites', []);
+  const [favourites, setFavourites] = useLocalStorage<FavouriteCoin>('favourites', []);
 
   function handleFavourites(name: string, logo: string | undefined) {
     if (favourites.filter((coin) => coin.name === name).length > 0) {
