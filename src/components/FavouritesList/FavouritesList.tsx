@@ -4,8 +4,6 @@ import FavouritesListElement from './FavouritesListElement/FavouritesListElement
 function FavouritesList() {
   const [favourites, setFavourites] = useFavourites();
 
-  console.log(favourites);
-
   return (
     <ul className='flex flex-col'>
       {favourites.map(({ id, name, logo }) => (
