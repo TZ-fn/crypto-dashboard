@@ -28,7 +28,7 @@ const getLocalStorageServerSnapshot = () => {
   throw Error('useLocalStorage is a client-only hook');
 };
 
-function useLocalStorage<T>(key: string, initialValue: T): [T[], setState: (v: T) => void] {
+function useLocalStorage<T>(key: string, initialValue: T): T[] | [T[], (value: T) => void] {
   const getSnapshot = () => getLocalStorageItem(key);
 
   const store = useSyncExternalStore(
@@ -38,9 +38,9 @@ function useLocalStorage<T>(key: string, initialValue: T): [T[], setState: (v: T
   );
 
   const setState = useCallback(
-    (v: T) => {
+    (value: T) => {
       try {
-        const nextState = typeof v === 'function' ? v(JSON.parse(store)) : v;
+        const nextState = typeof value === 'function' ? value(JSON.parse(store)) : value;
 
         if (nextState === undefined || nextState === null) {
           removeLocalStorageItem(key);
