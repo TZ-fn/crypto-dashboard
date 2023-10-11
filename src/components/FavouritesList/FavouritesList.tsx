@@ -6,7 +6,7 @@ function FavouritesList() {
 
   return (
     <ul className='flex flex-col'>
-      {favourites.map(({ id, name, logo }) => (
+      {favourites.map(({ name, logo }) => (
         <FavouritesListElement
           key={name}
           name={name}

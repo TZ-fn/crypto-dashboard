@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useSyncExternalStore } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useSyncExternalStore } from 'react';
 
 const dispatchStorageEvent = <T extends string | null | undefined>(key: string, newValue: T) => {
   window.dispatchEvent(new StorageEvent('storage', { key, newValue }));
@@ -28,7 +28,9 @@ const getLocalStorageServerSnapshot = () => {
   throw Error('useLocalStorage is a client-only hook');
 };
 
-function useLocalStorage<T>(key: string, initialValue: T): T[] | [T[], (value: T) => void] {
+type SetValue<T> = Dispatch<SetStateAction<T>>;
+
+function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   const getSnapshot = () => getLocalStorageItem(key);
 
   const store = useSyncExternalStore(
@@ -37,11 +39,10 @@ function useLocalStorage<T>(key: string, initialValue: T): T[] | [T[], (value: T
     getLocalStorageServerSnapshot,
   );
 
-  const setState = useCallback(
-    (value: T) => {
+  const setState: SetValue<T> = useCallback(
+    (value) => {
       try {
         const nextState = typeof value === 'function' ? value(JSON.parse(store)) : value;
-
         if (nextState === undefined || nextState === null) {
           removeLocalStorageItem(key);
         } else {
