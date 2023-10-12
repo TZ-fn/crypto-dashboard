@@ -5,7 +5,7 @@ function FavouritesList() {
   const [favourites, setFavourites] = useFavourites();
 
   return (
-    <ul className='flex flex-col'>
+    <ul className='m-2 flex flex-col'>
       {favourites.map(({ name, logo }) => (
         <FavouritesListElement
           key={name}
