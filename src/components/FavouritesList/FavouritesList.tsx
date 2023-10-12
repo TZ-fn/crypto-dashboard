@@ -14,13 +14,6 @@ function FavouritesList() {
           deletingFunction={setFavourites}
         />
       ))}
-      <button
-        onClick={() => {
-          setFavourites(() => []);
-        }}
-      >
-        Clear
-      </button>
     </ul>
   );
 }
