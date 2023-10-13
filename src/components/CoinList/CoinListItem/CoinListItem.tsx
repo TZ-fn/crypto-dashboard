@@ -35,7 +35,7 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
       <td className='px-0 py-6 sm:px-2 md:px-4 lg:px-12'>{price}</td>
       <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>{volume24h}</td>
       <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>
-        <button onClick={(e) => handleFavourites(name, logo, e)}>Favourites</button>
+        <button onClick={() => handleFavourites(name, logo)}>Favourites</button>
       </td>
     </tr>
   );

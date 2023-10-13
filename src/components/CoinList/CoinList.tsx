@@ -2,7 +2,6 @@ import { useEffect, useState, MouseEvent } from 'react';
 import CoinListItem from './CoinListItem/CoinListItem';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import useCoinContext from 'hooks/useCoinContext';
-import useFavourites from '~/hooks/useFavourites';
 import formatCurrency from 'utils/formatCurrency';
 import sortTable from 'utils/sortTable';
 import SortTypeIndicator from 'components/SortTypeIndicator/SortTypeIndicator';
