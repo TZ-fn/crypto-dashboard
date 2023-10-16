@@ -5,16 +5,19 @@ function FavouritesList() {
   const [favourites, setFavourites] = useFavourites();
 
   return (
-    <ul className='m-2 flex flex-col'>
-      {favourites.map(({ name, logo }) => (
-        <FavouritesListElement
-          key={name}
-          name={name}
-          logo={logo}
-          deletingFunction={setFavourites}
-        />
-      ))}
-    </ul>
+    favourites.length > 0 && (
+      <ul className='flex flex-col'>
+        <h2 className='border-b-[1px] border-solid border-border p-4 text-center'>Favourites</h2>
+        {favourites.map(({ name, logo }) => (
+          <FavouritesListElement
+            key={name}
+            name={name}
+            logo={logo}
+            deletingFunction={setFavourites}
+          />
+        ))}
+      </ul>
+    )
   );
 }
 
