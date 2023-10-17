@@ -32,9 +32,9 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
         {name} - {symbol}
       </td>
       <td className='px-0 py-6 sm:px-2 md:px-4 lg:px-12'>{price}</td>
-      <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>{volume24h}</td>
+      <td className='px-0 py-6 sm:px-2 md:px-4 lg:px-12'>{volume24h}</td>
       <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>
-        <button onClick={() => handleFavourites(index, name, logo)}>Favourites</button>
+        <button onClick={() => handleFavourites(index, name, logo)}>*</button>
       </td>
     </tr>
   );

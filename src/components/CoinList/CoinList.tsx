@@ -89,7 +89,7 @@ function CoinList() {
               )}
             </th>
             <th
-              className='select-none rounded-r px-1 py-7 sm:px-2 md:px-4 lg:px-12'
+              className='select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
                 setSortingStatus({ by: 'byVolume', direction: changeOrder });
                 setSortedData(sortTable('byVolume', changeOrder, data));
@@ -100,6 +100,7 @@ function CoinList() {
                 <SortTypeIndicator type={sortingStatus.direction} />
               )}
             </th>
+            <th className='select-none rounded-r px-1 py-7 sm:px-2 md:px-4 lg:px-12'></th>
           </tr>
         </thead>
         <tbody>
