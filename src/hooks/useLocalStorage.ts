@@ -19,7 +19,7 @@ const getLocalStorageItem = (key: string) => {
   return window.localStorage.getItem(key);
 };
 
-const useLocalStorageSubscribe = (callback: (this: Window, ev: StorageEvent) => any) => {
+const useLocalStorageSubscribe = (callback: (this: Window, event: StorageEvent) => void) => {
   window.addEventListener('storage', callback);
   return () => window.removeEventListener('storage', callback);
 };
@@ -41,15 +41,17 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
 
   const setState: SetValue<T> = useCallback(
     (value) => {
-      try {
-        const nextState = typeof value === 'function' ? value(JSON.parse(store)) : value;
-        if (nextState === undefined || nextState === null) {
-          removeLocalStorageItem(key);
-        } else {
-          setLocalStorageItem(key, nextState);
+      if (store) {
+        try {
+          const nextState = typeof value === 'function' ? value(JSON.parse(store)) : value;
+          if (nextState === undefined || nextState === null) {
+            removeLocalStorageItem(key);
+          } else {
+            setLocalStorageItem(key, nextState);
+          }
+        } catch (e) {
+          console.warn(e);
         }
-      } catch (e) {
-        console.warn(e);
       }
     },
     [key, store],
