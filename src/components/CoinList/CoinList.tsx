@@ -100,7 +100,7 @@ function CoinList() {
                 <SortTypeIndicator type={sortingStatus.direction} />
               )}
             </th>
-            <th className='select-none rounded-r px-1 py-7 sm:px-2 md:px-4 lg:px-12'></th>
+            <th className='select-none rounded-r px-1 py-7 sm:px-2 md:px-4 lg:px-12'>Favourite</th>
           </tr>
         </thead>
         <tbody>

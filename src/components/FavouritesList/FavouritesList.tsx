@@ -7,7 +7,9 @@ function FavouritesList() {
   return (
     favourites.length > 0 && (
       <ul className='flex flex-col'>
-        <h2 className='border-b-[1px] border-solid border-border p-4 text-center'>Favourites</h2>
+        <h2 className='border-b-[1px] border-solid border-border bg-bg-lighter-2 p-4 text-center'>
+          Favourites
+        </h2>
         {favourites.map(({ id, name, logo }) => (
           <FavouritesListElement
             id={id}
