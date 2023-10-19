@@ -4,7 +4,9 @@ import FavouritesListElement from './FavouritesListElement/FavouritesListElement
 function FavouritesList() {
   const [favourites, setFavourites] = useFavourites();
 
-  const sortedFavourites = favourites.sort((a, b) => a.id - b.id);
+  const sortedFavourites = favourites.sort((coin1, coin2) =>
+    new Intl.Collator('en').compare(coin1.name, coin2.name),
+  );
 
   return (
     favourites.length > 0 && (
