@@ -61,11 +61,11 @@ function CoinList() {
 
       <table className='w-full max-w-6xl border-separate border-spacing-y-3 px-2 text-center text-sm sm:text-base'>
         <thead>
-          <tr className='cursor-pointer bg-bg-lighter-2 hover:bg-bg-lighter'>
+          <tr className='bg-bg-lighter-2 hover:bg-bg-lighter'>
             <th className='select-none rounded-l px-1 py-7 sm:px-2 md:px-4 lg:px-12'>#</th>
             <th className='select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'>Logo</th>
             <th
-              className='select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
+              className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
                 setSortingStatus({ by: 'byName', direction: changeOrder });
                 setSortedData(sortTable('byName', changeOrder, data));
@@ -77,7 +77,7 @@ function CoinList() {
               )}
             </th>
             <th
-              className='select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
+              className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
                 setSortingStatus({ by: 'byPrice', direction: changeOrder });
                 setSortedData(sortTable('byPrice', changeOrder, data));
@@ -89,7 +89,7 @@ function CoinList() {
               )}
             </th>
             <th
-              className='select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
+              className=' cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
                 setSortingStatus({ by: 'byVolume', direction: changeOrder });
                 setSortedData(sortTable('byVolume', changeOrder, data));
