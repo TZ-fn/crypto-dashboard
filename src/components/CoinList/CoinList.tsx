@@ -32,11 +32,7 @@ function CoinList() {
   }
 
   const changeOrder =
-    sortingStatus.direction === null
-      ? 'descending'
-      : sortingStatus.direction === 'descending'
-      ? 'ascending'
-      : null;
+    sortingStatus.direction === null ? 'descending' : sortingStatus.direction === 'descending' ? 'ascending' : null;
 
   if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
 
@@ -72,9 +68,7 @@ function CoinList() {
               }}
             >
               Name and Symbol
-              {sortingStatus.by === 'byName' && (
-                <SortTypeIndicator type={sortingStatus.direction} />
-              )}
+              {sortingStatus.by === 'byName' && <SortTypeIndicator type={sortingStatus.direction} />}
             </th>
             <th
               className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
@@ -84,9 +78,7 @@ function CoinList() {
               }}
             >
               Price
-              {sortingStatus.by === 'byPrice' && (
-                <SortTypeIndicator type={sortingStatus.direction} />
-              )}
+              {sortingStatus.by === 'byPrice' && <SortTypeIndicator type={sortingStatus.direction} />}
             </th>
             <th
               className=' cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
@@ -96,9 +88,7 @@ function CoinList() {
               }}
             >
               Volume (24h)
-              {sortingStatus.by === 'byVolume' && (
-                <SortTypeIndicator type={sortingStatus.direction} />
-              )}
+              {sortingStatus.by === 'byVolume' && <SortTypeIndicator type={sortingStatus.direction} />}
             </th>
             <th className='select-none rounded-r px-1 py-7 sm:px-2 md:px-4 lg:px-12'>Favourite</th>
           </tr>

@@ -33,11 +33,7 @@ type SetValue<T> = Dispatch<SetStateAction<T>>;
 function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   const getSnapshot = () => getLocalStorageItem(key);
 
-  const store = useSyncExternalStore(
-    useLocalStorageSubscribe,
-    getSnapshot,
-    getLocalStorageServerSnapshot,
-  );
+  const store = useSyncExternalStore(useLocalStorageSubscribe, getSnapshot, getLocalStorageServerSnapshot);
 
   const setState: SetValue<T> = useCallback(
     (value) => {
