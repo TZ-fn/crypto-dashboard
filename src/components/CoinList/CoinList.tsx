@@ -31,7 +31,7 @@ function CoinList() {
     return metaData.data[coinID]?.logo || undefined;
   }
 
-  let changeOrder =
+  let changeOrder: 'descending' | 'ascending' | null =
     sortingStatus.direction === null ? 'descending' : sortingStatus.direction === 'descending' ? 'ascending' : null;
 
   if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
