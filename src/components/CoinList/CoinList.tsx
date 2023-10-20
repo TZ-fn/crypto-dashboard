@@ -31,7 +31,7 @@ function CoinList() {
     return metaData.data[coinID]?.logo || undefined;
   }
 
-  const changeOrder =
+  let changeOrder =
     sortingStatus.direction === null ? 'descending' : sortingStatus.direction === 'descending' ? 'ascending' : null;
 
   if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
@@ -63,6 +63,10 @@ function CoinList() {
             <th
               className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
+                if (sortingStatus.by !== 'byName') {
+                  changeOrder = 'descending';
+                }
+
                 setSortingStatus({ by: 'byName', direction: changeOrder });
                 setSortedData(sortTable('byName', changeOrder, data));
               }}
@@ -73,6 +77,9 @@ function CoinList() {
             <th
               className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
+                if (sortingStatus.by !== 'byPrice') {
+                  changeOrder = 'descending';
+                }
                 setSortingStatus({ by: 'byPrice', direction: changeOrder });
                 setSortedData(sortTable('byPrice', changeOrder, data));
               }}
@@ -83,6 +90,9 @@ function CoinList() {
             <th
               className=' cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
               onClick={() => {
+                if (sortingStatus.by !== 'byVolume') {
+                  changeOrder = 'descending';
+                }
                 setSortingStatus({ by: 'byVolume', direction: changeOrder });
                 setSortedData(sortTable('byVolume', changeOrder, data));
               }}
