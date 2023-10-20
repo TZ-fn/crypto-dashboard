@@ -38,6 +38,10 @@ Vite
 
 Vitest
 
+## Problems I have encountered
+
+One of the challenges was using the localStorage web API and converting into a custom hook. My app wasn't updating correctly its state when localStorage items were changed. I've managed to solve it by using storage events and useSyncExternalStore hook.
+
 ## Acknowledgements
 
 <a target="_blank" href="https://icons8.com/icon/122841/up">Up</a> and <a target="_blank" href="https://icons8.com/icon/h2X0Cy3sU70i/down">Down</a> icons by <a target="_blank" href="https://icons8.com">Icons8</a>
