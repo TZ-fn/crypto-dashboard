@@ -20,7 +20,7 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
 
   return (
     <tr
-      // onClick={() => navigate(`details/${name.toLocaleLowerCase()}`)}
+      onClick={() => navigate(`details/${name.toLocaleLowerCase()}`)}
       className='cursor-pointer border-b-2 bg-bg-lighter text-center hover:bg-bg-lighter-2'
     >
       <td className='rounded-l px-1 py-6 sm:px-2 md:px-4 lg:px-12'>{index + 1}</td>
@@ -33,7 +33,13 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
       <td className='px-0 py-6 sm:px-2 md:px-4 lg:px-12'>{price}</td>
       <td className='px-0 py-6 sm:px-2 md:px-4 lg:px-12'>{volume24h}</td>
       <td className='rounded-r px-1 py-6 sm:px-2 md:px-4 lg:px-12'>
-        <button onClick={() => handleFavourites(index, name, logo)}>
+        <button
+          className=''
+          onClick={(e) => {
+            e.stopPropagation();
+            handleFavourites(index, name, logo);
+          }}
+        >
           <span className='visually-hidden'>
             {isInFavourites ? 'Remove this item from the favourites.' : 'Add this item to the favourites.'}
           </span>
