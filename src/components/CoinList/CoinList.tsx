@@ -31,8 +31,18 @@ function CoinList() {
     return metaData.data[coinID]?.logo || undefined;
   }
 
-  let changeOrder: 'descending' | 'ascending' | null =
+  const changeOrder =
     sortingStatus.direction === null ? 'descending' : sortingStatus.direction === 'descending' ? 'ascending' : null;
+
+  function handleSorting(by: null | 'byName' | 'byPrice' | 'byVolume') {
+    if (sortingStatus.by !== by) {
+      setSortingStatus({ by: by, direction: 'descending' });
+      setSortedData(sortTable(by!, 'descending', data));
+    } else {
+      setSortingStatus({ by: by, direction: changeOrder });
+      setSortedData(sortTable(by!, changeOrder, data));
+    }
+  }
 
   if (isLoading || metaIsFetching || !data) return <LoadingSpinner />;
 
@@ -62,40 +72,21 @@ function CoinList() {
             <th className='select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'>Logo</th>
             <th
               className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
-              onClick={() => {
-                if (sortingStatus.by !== 'byName') {
-                  changeOrder = 'descending';
-                }
-
-                setSortingStatus({ by: 'byName', direction: changeOrder });
-                setSortedData(sortTable('byName', changeOrder, data));
-              }}
+              onClick={() => handleSorting('byName')}
             >
               Name and Symbol
               {sortingStatus.by === 'byName' && <SortTypeIndicator type={sortingStatus.direction} />}
             </th>
             <th
               className='cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
-              onClick={() => {
-                if (sortingStatus.by !== 'byPrice') {
-                  changeOrder = 'descending';
-                }
-                setSortingStatus({ by: 'byPrice', direction: changeOrder });
-                setSortedData(sortTable('byPrice', changeOrder, data));
-              }}
+              onClick={() => handleSorting('byPrice')}
             >
               Price
               {sortingStatus.by === 'byPrice' && <SortTypeIndicator type={sortingStatus.direction} />}
             </th>
             <th
               className=' cursor-pointer select-none px-0 py-7 sm:px-2 md:px-4 lg:px-12'
-              onClick={() => {
-                if (sortingStatus.by !== 'byVolume') {
-                  changeOrder = 'descending';
-                }
-                setSortingStatus({ by: 'byVolume', direction: changeOrder });
-                setSortedData(sortTable('byVolume', changeOrder, data));
-              }}
+              onClick={() => handleSorting('byVolume')}
             >
               Volume (24h)
               {sortingStatus.by === 'byVolume' && <SortTypeIndicator type={sortingStatus.direction} />}
