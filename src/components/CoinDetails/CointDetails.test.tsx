@@ -5,7 +5,7 @@ import mockedContextData from 'tests/mockedContextData';
 import CoinDetails from './CoinDetails';
 import CoinsContext from 'context/CoinsContext';
 
-const coinsName = mockedContextData.latestData.data.data[0].name.toLocaleLowerCase();
+const coinsName = mockedContextData.latestData.data.data[0]!.name.toLocaleLowerCase();
 const nameRegex = new RegExp(coinsName, 'i');
 
 function renderCoinDetailsWithContext() {
