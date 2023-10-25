@@ -1,4 +1,5 @@
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 import FavouriteCoin from 'types/FavouriteCoin';
 
 function FavouritesListElement({
@@ -9,8 +10,13 @@ function FavouritesListElement({
 }: FavouriteCoin & {
   deletingFunction: (id: number, name: string, logo?: string) => void;
 }) {
+  const navigate = useNavigate();
+
   return (
-    <li className='my-1.5 flex min-w-[14rem] items-center gap-4 rounded border-b-[1px] border-solid border-border bg-bg-lighter p-2 hover:bg-bg-lighter-2'>
+    <li
+      className='xs:p-2 my-1.5 flex min-w-[14rem] cursor-pointer items-center gap-4 rounded bg-bg-lighter p-2 hover:bg-bg-lighter-2 sm:p-2 md:p-4 lg:p-4'
+      onClick={() => navigate(`details/${name.toLocaleLowerCase()}`)}
+    >
       {logo ? <img className='min-w-[2rem] max-w-[1.5vw]' src={logo} alt='' /> : <LoadingSpinner />}
       <p>{name}</p>
       <button

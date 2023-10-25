@@ -8,7 +8,7 @@ function FavouritesList() {
 
   return favourites.length > 0 ? (
     <ul className='flex flex-col'>
-      <h2 className='my-1.5 rounded border-b-[1px] border-solid border-border bg-bg-lighter-2 p-2 text-center'>
+      <h2 className=' my-1.5 select-none rounded bg-bg-lighter-2 p-2 text-center font-bold sm:p-2 md:p-5 lg:p-6'>
         Favourites
       </h2>
       {sortedFavourites.map(({ id, name, logo }) => (
