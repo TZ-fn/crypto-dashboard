@@ -14,13 +14,16 @@ function FavouritesListElement({
 
   return (
     <li
-      className='xs:p-2 my-1.5 flex min-w-[14rem] cursor-pointer items-center gap-4 rounded bg-bg-lighter p-2 hover:bg-bg-lighter-2 sm:p-2 md:p-4 lg:p-4'
+      className='xs:p-2 my-3 flex min-w-[14rem] cursor-pointer items-center gap-4 rounded bg-bg-lighter p-2 hover:bg-bg-lighter-2 sm:p-2 md:p-4 lg:p-4'
       onClick={() => navigate(`details/${name.toLocaleLowerCase()}`)}
     >
       {logo ? <img className='min-w-[2rem] max-w-[1.5vw]' src={logo} alt='' /> : <LoadingSpinner />}
       <p>{name}</p>
       <button
-        onClick={() => deletingFunction(id, name)}
+        onClick={(e) => {
+          e.stopPropagation();
+          deletingFunction(id, name);
+        }}
         className='ml-auto border-[1px] border-solid border-[transparent] px-1.5 hover:border-border'
       >
         X
