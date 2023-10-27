@@ -1,6 +1,7 @@
+import { useState } from 'react';
+import { motion, AnimatePresence, animate } from 'framer-motion';
 import useFavourites from 'hooks/useFavourites';
 import FavouritesListElement from './FavouritesListElement/FavouritesListElement';
-import { useState } from 'react';
 import SortTypeIndicator from '../SortTypeIndicator/SortTypeIndicator';
 
 function FavouritesList() {
@@ -19,12 +20,22 @@ function FavouritesList() {
         </button>
       </div>
 
-      <ul>
-        {isListVisible &&
-          sortedFavourites.map(({ id, name, logo }) => (
-            <FavouritesListElement id={id} key={name} name={name} logo={logo} deletingFunction={setFavourites} />
-          ))}
-      </ul>
+      <AnimatePresence>
+        {isListVisible && (
+          <div className='overflow-hidden'>
+            <motion.ul
+              initial={{ opacity: 0, y: '-20rem' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: '-20rem' }}
+              transition={{ duration: 0.3 }}
+            >
+              {sortedFavourites.map(({ id, name, logo }) => (
+                <FavouritesListElement id={id} key={name} name={name} logo={logo} deletingFunction={setFavourites} />
+              ))}
+            </motion.ul>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   ) : null;
 }
