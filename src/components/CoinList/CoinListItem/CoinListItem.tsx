@@ -45,7 +45,7 @@ function CoinListItem({ index, logo, name, symbol, price, volume24h }: CoinListI
           </span>
           <img
             src={StarIcon}
-            className={`min-w-[2rem] max-w-[2.6vw] ${isInFavourites ? '' : 'grayscale'} `}
+            className={`min-w-[2rem] max-w-[2.6vw] transition-all duration-300 ${isInFavourites ? '' : 'grayscale'} `}
             alt='Star icon'
           />
         </button>
