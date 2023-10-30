@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence, animate } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import useFavourites from 'hooks/useFavourites';
 import FavouritesListElement from './FavouritesListElement/FavouritesListElement';
 import SortTypeIndicator from '../SortTypeIndicator/SortTypeIndicator';
@@ -29,9 +29,11 @@ function FavouritesList() {
               exit={{ opacity: 0, y: '-20rem' }}
               transition={{ duration: 0.3 }}
             >
-              {sortedFavourites.map(({ id, name, logo }) => (
-                <FavouritesListElement id={id} key={name} name={name} logo={logo} deletingFunction={setFavourites} />
-              ))}
+              <AnimatePresence>
+                {sortedFavourites.map(({ id, name, logo }) => (
+                  <FavouritesListElement id={id} key={name} name={name} logo={logo} deletingFunction={setFavourites} />
+                ))}
+              </AnimatePresence>
             </motion.ul>
           </div>
         )}

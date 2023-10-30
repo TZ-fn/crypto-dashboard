@@ -1,4 +1,5 @@
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import FavouriteCoin from 'types/FavouriteCoin';
 
@@ -13,7 +14,11 @@ function FavouritesListElement({
   const navigate = useNavigate();
 
   return (
-    <li
+    <motion.li
+      initial={{ x: '-20rem' }}
+      animate={{ x: 0 }}
+      exit={{ x: '20rem' }}
+      transition={{ duration: 0.3 }}
       className='xs:p-2 my-3 flex min-w-[14rem] cursor-pointer items-center gap-4 rounded bg-bg-lighter p-2 hover:bg-bg-lighter-2 sm:p-2 md:p-4 lg:p-4'
       onClick={() => navigate(`details/${name.toLocaleLowerCase()}`)}
     >
@@ -28,7 +33,7 @@ function FavouritesListElement({
       >
         X
       </button>
-    </li>
+    </motion.li>
   );
 }
 
