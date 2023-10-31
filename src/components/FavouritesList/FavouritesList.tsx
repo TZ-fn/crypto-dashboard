@@ -21,12 +21,12 @@ function FavouritesList() {
       </div>
 
       <AnimatePresence>
-        {isListVisible && (
+        {
           <div className='overflow-hidden'>
             <motion.ul
-              initial={{ opacity: 0, y: '-20rem' }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: '-20rem' }}
+              initial={{ y: '-30rem' }}
+              animate={isListVisible ? { y: 0 } : { y: '-120%' }}
+              exit={{ y: '-30rem' }}
               transition={{ duration: 0.3 }}
             >
               <AnimatePresence>
@@ -36,7 +36,7 @@ function FavouritesList() {
               </AnimatePresence>
             </motion.ul>
           </div>
-        )}
+        }
       </AnimatePresence>
     </div>
   ) : null;
