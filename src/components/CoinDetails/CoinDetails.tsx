@@ -21,16 +21,15 @@ function CoinDetails() {
         }
       })[0];
     }
-  }, [data]);
+  }, [data, params]);
 
   const currentCoinMetaData = useMemo(() => {
     if (currentCoinData) {
       return metaData.data[currentCoinData.id];
     }
-  }, [metaData]);
+  }, [metaData, params]);
 
-  if (isLoading || metaIsLoading || !currentCoinData || !currentCoinMetaData)
-    return <LoadingSpinner />;
+  if (isLoading || metaIsLoading || !currentCoinData || !currentCoinMetaData) return <LoadingSpinner />;
 
   if (error && error instanceof Error) {
     return (
@@ -46,9 +45,7 @@ function CoinDetails() {
 
   if (!params.name) {
     return (
-      <div className='bg-bg-lighter px-24 py-6 text-center text-lg'>
-        Please select a coin to get it's details.
-      </div>
+      <div className='bg-bg-lighter px-24 py-6 text-center text-lg'>Please select a coin to get it's details.</div>
     );
   }
 
@@ -58,9 +55,7 @@ function CoinDetails() {
     <div className='flex w-full max-w-6xl flex-col items-center justify-center gap-4 rounded bg-bg-lighter px-4 py-6 md:px-8 lg:px-24'>
       <h1 className='text-6xl'>{capitalise(params.name)}</h1>
       <img className='w-[5rem]' src={currentCoinMetaData.logo} alt='' />
-      <p className='text-l max-w-[60rem]'>
-        {getLinkFromDescription(currentCoinMetaData.description)}
-      </p>
+      <p className='text-l max-w-[60rem]'>{getLinkFromDescription(currentCoinMetaData.description)}</p>
       <p>
         Subreddit:{' '}
         {currentCoinMetaData.urls.reddit[0] ? (
