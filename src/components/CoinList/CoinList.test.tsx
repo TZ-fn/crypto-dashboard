@@ -21,13 +21,9 @@ describe('CoinList', () => {
   it('renders CoinList correctly', async () => {
     renderCoinListWithContext();
     expect(await screen.findByRole('columnheader', { name: /logo/i })).toBeInTheDocument();
-    expect(
-      await screen.findByRole('columnheader', { name: /name and symbol/i }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole('columnheader', { name: /name and symbol/i })).toBeInTheDocument();
     expect(await screen.findByRole('columnheader', { name: /price/i })).toBeInTheDocument();
-    expect(
-      await screen.findByRole('columnheader', { name: /volume \(24h\)/i }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole('columnheader', { name: /volume \(24h\)/i })).toBeInTheDocument();
   });
 
   it('changes the sorting indicator correctly', async () => {
@@ -44,11 +40,7 @@ describe('CoinList', () => {
 
     await user.click(nameHeader);
 
-    expect(
-      screen.queryByRole('columnheader', { name: /name and symbol ▼/i }),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('columnheader', { name: /name and symbol ▲/i }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('columnheader', { name: /name and symbol ▼/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('columnheader', { name: /name and symbol ▲/i })).not.toBeInTheDocument();
   });
 });

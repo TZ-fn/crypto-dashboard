@@ -14,8 +14,7 @@ const getLinkFromDescription = (defaultDescription: string) => {
   const addressMatch = defaultDescription.match(addressRegex);
 
   const href = addressMatch !== null ? addressMatch[0] : null;
-  const address =
-    addressMatch !== null ? addressMatch[0].replace(/(https|http)?(:\/+)?(\/\.+)?/g, '') : null;
+  const address = addressMatch !== null ? addressMatch[0].replace(/(https|http)?(:\/+)?(\/\.+)?/g, '') : null;
 
   return (
     <>
