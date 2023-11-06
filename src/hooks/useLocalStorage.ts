@@ -39,7 +39,7 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
     (value) => {
       if (store) {
         try {
-          const nextState = typeof value === 'function' ? value(JSON.parse(store)) : value;
+          const nextState = value instanceof Function ? value(JSON.parse(store)) : value;
           if (nextState === undefined || nextState === null) {
             removeLocalStorageItem(key);
           } else {
